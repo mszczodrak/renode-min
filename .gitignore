@@ -19,6 +19,4 @@ lib/resources/
 src/Renode/Properties/AssemblyInfo.cs
 packages
 
-#verilator trace files
-*.vcd
 
