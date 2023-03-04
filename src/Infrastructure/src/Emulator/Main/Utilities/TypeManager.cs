@@ -811,10 +811,6 @@ namespace Antmicro.Renode.Utilities
             "protobuf-net.dll",
             "Sprache.dll",
             "testhost.dll",
-            "Xwt.dll",
-            "Xwt.Gtk.dll",
-            "Xwt.Gtk3.dll",
-            "Xwt.WPF.dll",
             // Exclude from analysis all "Microsoft" and "System" assemblies.
             "Microsoft.",
             "System.",

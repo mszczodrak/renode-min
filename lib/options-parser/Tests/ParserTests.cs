@@ -656,42 +656,6 @@ namespace Antmicro.OptionsParser.Tests
         }
 
         [Test]
-        public void ShouldRecreateUnparsedArgument10()
-        {
-            var args = new[] { "--no-xwt", "--port", "8888" };
-            var parser = new OptionsParser();
-            parser.WithOption<int>("port");
-
-            parser.Parse(args);
-
-            Assert.AreEqual(1, parser.ParsedOptions.Count());
-            Assert.AreEqual("port", parser.ParsedOptions.First().Flag.LongName);
-            Assert.AreEqual(8888, parser.ParsedOptions.First().Value);
-
-            Assert.AreEqual(1, parser.UnexpectedArguments.Count());
-            Assert.AreEqual("no-xwt", parser.UnexpectedArguments.ElementAt(0).Value);
-            Assert.AreEqual("--no-xwt", parser.RecreateUnparsedArguments());
-        }
-
-        [Test]
-        public void ShouldRecreateUnparsedArgument11()
-        {
-            var args = new[] { "--no-xwt", "--port=8888" };
-            var parser = new OptionsParser();
-            parser.WithOption<int>("port");
-
-            parser.Parse(args);
-
-            Assert.AreEqual(1, parser.ParsedOptions.Count());
-            Assert.AreEqual("port", parser.ParsedOptions.First().Flag.LongName);
-            Assert.AreEqual(8888, parser.ParsedOptions.First().Value);
-
-            Assert.AreEqual(1, parser.UnexpectedArguments.Count());
-            Assert.AreEqual("no-xwt", parser.UnexpectedArguments.ElementAt(0).Value);
-            Assert.AreEqual("--no-xwt", parser.RecreateUnparsedArguments());
-        }
-
-        [Test]
         public void ShouldRecreateUnparsedArgument12()
         {
             var args = new[] { "-n123", "--wrong-arg" };
@@ -725,42 +689,6 @@ namespace Antmicro.OptionsParser.Tests
             Assert.AreEqual(1, parser.UnexpectedArguments.Count());
             Assert.AreEqual("wrong-arg", parser.UnexpectedArguments.ElementAt(0).Value);
             Assert.AreEqual("--wrong-arg", parser.RecreateUnparsedArguments());
-        }
-
-        [Test]
-        public void ShouldRecreateUnparsedArgument14()
-        {
-            var args = new[] { "--port", "8888", "--no-xwt" };
-            var parser = new OptionsParser();
-            parser.WithOption<int>("port");
-
-            parser.Parse(args);
-
-            Assert.AreEqual(1, parser.ParsedOptions.Count());
-            Assert.AreEqual("port", parser.ParsedOptions.First().Flag.LongName);
-            Assert.AreEqual(8888, parser.ParsedOptions.First().Value);
-
-            Assert.AreEqual(1, parser.UnexpectedArguments.Count());
-            Assert.AreEqual("no-xwt", parser.UnexpectedArguments.ElementAt(0).Value);
-            Assert.AreEqual("--no-xwt", parser.RecreateUnparsedArguments());
-        }
-
-        [Test]
-        public void ShouldRecreateUnparsedArgument15()
-        {
-            var args = new[] { "--port=8888", "--no-xwt" };
-            var parser = new OptionsParser();
-            parser.WithOption<int>("port");
-
-            parser.Parse(args);
-
-            Assert.AreEqual(1, parser.ParsedOptions.Count());
-            Assert.AreEqual("port", parser.ParsedOptions.First().Flag.LongName);
-            Assert.AreEqual(8888, parser.ParsedOptions.First().Value);
-
-            Assert.AreEqual(1, parser.UnexpectedArguments.Count());
-            Assert.AreEqual("no-xwt", parser.UnexpectedArguments.ElementAt(0).Value);
-            Assert.AreEqual("--no-xwt", parser.RecreateUnparsedArguments());
         }
 
         [OneTimeSetUp]

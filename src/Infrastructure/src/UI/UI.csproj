@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
-  <PropertyGroup Condition=" $(GUI_DISABLED) == 'true' ">
-    <DefineConstants>$(DefineConstants);GUI_DISABLED</DefineConstants>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationFramework" Condition=" $(CurrentPlatform) == 'Windows'" />
     <Reference Include="PresentationCore" Condition=" $(CurrentPlatform) == 'Windows'" />
@@ -46,26 +43,14 @@
   <ItemGroup Condition=" $(CurrentPlatform) != 'Windows'">
     <Reference Include="Mono.Posix" />
   </ItemGroup>
-  <ItemGroup Condition=" $(CurrentPlatform) != Windows And $(GUI_DISABLED) != 'true' ">
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>glib-sharp-2.0</Package>
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="CLIProgressMonitor.cs" />
     <Compile Include="CommandLineInterface.cs" />
-    <Compile Include="CrashHandler.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="ConsoleWindowBackendAnalyzer.cs" />
     <Compile Include="IConsoleBackendAnalyzerProvider.cs" />
-    <Compile Include="ConsoleBackendAnalyzers\XTermProvider.cs" />
-    <Compile Include="ConsoleBackendAnalyzers\GnomeTerminalProvider.cs" />
     <Compile Include="ConsoleBackendAnalyzers\PuttyProvider.cs" />
     <Compile Include="ConsoleBackendAnalyzers\TerminalAppProvider.cs" />
-    <Compile Include="ConsoleBackendAnalyzers\WindowPositionProvider.cs" />
     <Compile Include="ConsoleBackendAnalyzers\ProcessBasedProvider.cs" />
     <Compile Include="DummyIOSource.cs" />
     <Compile Include="ConsoleIOSource.cs" />
@@ -101,18 +86,6 @@
     <ProjectReference Include="..\..\..\..\lib\options-parser\OptionsParser.csproj">
       <Project>{C56AABEF-C01E-493F-A65F-09A572FE9B2E}</Project>
       <Name>OptionsParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\lib\xwt\Xwt\Xwt.csproj">
-      <Project>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</Project>
-      <Name>Xwt</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\lib\xwt\Xwt.Gtk\Xwt.Gtk.csproj" Condition=" $(CurrentPlatform) != 'Windows' And $(GUI_DISABLED) != 'true' ">
-      <Project>{C3887A93-B2BD-4097-8E2F-3A063EFF32FD}</Project>
-      <Name>Xwt.Gtk</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\lib\xwt\Xwt.WPF\Xwt.WPF.csproj" Condition=" $(CurrentPlatform) == 'Windows' And $(GUI_DISABLED) != 'true' ">
-      <Project>{c93d746e-1586-4d4f-b411-bf5a966e6a08}</Project>
-      <Name>Xwt.WPF</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\lib\Migrant\Migrant\Migrant.csproj">
       <Project>{5F87C357-09FB-4F53-BE37-41FE5BD88957}</Project>

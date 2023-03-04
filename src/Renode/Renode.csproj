@@ -37,9 +37,6 @@
     <ConsolePause>false</ConsolePause>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition=" $(GUI_DISABLED) == 'true' ">
-    <DefineConstants>$(DefineConstants);GUI_DISABLED</DefineConstants>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Mono.Posix" Condition=" $(CurrentPlatform) != 'Windows'" />
@@ -163,18 +160,6 @@
     <ProjectReference Include="..\..\lib\options-parser\OptionsParser.csproj">
       <Project>{C56AABEF-C01E-493F-A65F-09A572FE9B2E}</Project>
       <Name>OptionsParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\xwt\Xwt\Xwt.csproj">
-      <Project>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</Project>
-      <Name>Xwt</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\xwt\Xwt.Gtk\Xwt.Gtk.csproj" Condition=" $(CurrentPlatform) != 'Windows' And $(GUI_DISABLED) != 'true' ">
-      <Project>{C3887A93-B2BD-4097-8E2F-3A063EFF32FD}</Project>
-      <Name>Xwt.Gtk</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\xwt\Xwt.WPF\Xwt.WPF.csproj" Condition=" $(CurrentPlatform) == 'Windows' And $(GUI_DISABLED) != 'true' ">
-      <Project>{c93d746e-1586-4d4f-b411-bf5a966e6a08}</Project>
-      <Name>Xwt.WPF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-arm.csproj">
       <Project>{13222124-707C-5EFD-8289-2728351FB7E9}</Project>

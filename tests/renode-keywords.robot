@@ -15,7 +15,6 @@ ${PORT_NUMBER}               9999
 ${DIRECTORY}                 ${CURDIR}/../output/bin/${CONFIGURATION}
 ${BINARY_NAME}               Renode.exe
 ${HOTSPOT_ACTION}            None
-${DISABLE_XWT}               False
 ${DEFAULT_UART_TIMEOUT}      8
 ${CREATE_SNAPSHOT_ON_FAIL}   True
 ${SAVE_LOG_ON_FAIL}          True
@@ -36,9 +35,8 @@ Setup
     # http://robotframework.org/robotframework/latest/libraries/Process.html#Standard%20output%20and%20error%20streams
     @{PARAMS}=           Create List  --robot-server-port  ${PORT_NUMBER}  --hide-log
 
-    IF  ${DISABLE_XWT}
-        Insert Into List  ${PARAMS}  0 
-    END
+    
+    Insert Into List  ${PARAMS}  0 
 
     IF  not ${SKIP_RUNNING_SERVER}
         File Should Exist    ${DIRECTORY}/${BINARY_NAME}  msg=Robot Framework remote server binary not found (${DIRECTORY}/${BINARY_NAME}). Did you forget to build it in ${CONFIGURATION} configuration?
