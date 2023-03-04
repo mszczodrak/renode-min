@@ -51,8 +51,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "src\Infrastruc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeripheralsTests", "src\Infrastructure\src\Emulator\Peripherals\Test\PeripheralsTests\PeripheralsTests.csproj", "{4FBABBAC-D029-4867-8416-32C3469BCAEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedLoggerViewerPlugin", "src\Infrastructure\src\Plugins\AdvancedLoggerViewerPlugin\AdvancedLoggerViewerPlugin.csproj", "{0D9CF6E9-AFB0-4558-8DA5-24FDBAF856F0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleCommandPlugin", "src\Infrastructure\src\Plugins\SampleCommandPlugin\SampleCommandPlugin.csproj", "{66A5675A-13AE-4454-88A6-29EB2D6F5988}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracePlugin", "src\Infrastructure\src\Plugins\TracePlugin\TracePlugin.csproj", "{887C6088-F483-466A-A671-06EEC42B8DC1}"
