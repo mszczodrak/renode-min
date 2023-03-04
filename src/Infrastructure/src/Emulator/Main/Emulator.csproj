@@ -413,7 +413,6 @@
     <Compile Include="Utilities\Collections\CircularBuffer.cs" />
     <Compile Include="Utilities\Collections\FastReadConcurrentTwoWayDictionary.cs" />
     <Compile Include="Peripherals\UART\UARTBackend.cs" />
-    <Compile Include="Peripherals\Video\VideoBackend.cs" />
     <Compile Include="Core\Structure\Registers\RegisterCollection.cs" />
     <Compile Include="Core\Structure\Registers\PeripheralRegisterExtensions.cs" />
     <Compile Include="Peripherals\IPhysicalLayer.cs" />

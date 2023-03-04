@@ -21,8 +21,6 @@ using Antmicro.OptionsParser;
 using System.IO;
 using System.Diagnostics;
 using Antmicro.Renode.Analyzers;
-using Antmicro.Renode.Extensions.Analyzers.Video;
-using Antmicro.Renode.Backends.Video;
 
 namespace Antmicro.Renode.UI
 {
@@ -81,14 +79,11 @@ namespace Antmicro.Renode.UI
                 EmulationManager.Instance.ProgressMonitor.Handler = new CLIProgressMonitor();
 
                 var uartAnalyzerType = (options.RobotDebug) ? typeof(LoggingUartAnalyzer) : typeof(ConsoleWindowBackendAnalyzer);
-                var videoAnalyzerType = (options.RobotDebug) ? typeof(DummyVideoAnalyzer) : typeof(VideoAnalyzer);
 
                 EmulationManager.Instance.CurrentEmulation.BackendManager.SetPreferredAnalyzer(typeof(UARTBackend), uartAnalyzerType);
-                EmulationManager.Instance.CurrentEmulation.BackendManager.SetPreferredAnalyzer(typeof(VideoBackend), videoAnalyzerType);
                 EmulationManager.Instance.EmulationChanged += () =>
                 {
                     EmulationManager.Instance.CurrentEmulation.BackendManager.SetPreferredAnalyzer(typeof(UARTBackend), uartAnalyzerType);
-                    EmulationManager.Instance.CurrentEmulation.BackendManager.SetPreferredAnalyzer(typeof(VideoBackend), videoAnalyzerType);
                 };
 
                 var shell = PrepareShell(options, monitor);
@@ -111,31 +106,6 @@ namespace Antmicro.Renode.UI
                 if(options.RobotDebug)
                 {
                     ConsoleWindowBackendAnalyzer terminal = null;
-
-                    Emulator.EnableGUI += () =>
-                    {
-                        Logger.AddBackend(ConsoleBackend.Instance, "console", true);
-                        terminal = new ConsoleWindowBackendAnalyzer(true);
-                        terminal.Show();
-                        shell.Terminal = new NavigableTerminalEmulator(terminal.IO);
-                        shell.Terminal.PlainMode = options.Plain;
-
-                        new System.Threading.Thread(x => shell.Start(true))
-                        {
-                            IsBackground = true,
-                            Name = "Shell thread"
-                        }.Start();
-                    };
-
-                    Emulator.DisableGUI += () =>
-                    {
-                        if(options.HideLog)
-                        {
-                            Logger.RemoveBackend(ConsoleBackend.Instance);
-                        }
-                        terminal?.Hide();
-                        terminal = null;
-                    };
                 }
 
                 Emulator.WaitForExit();

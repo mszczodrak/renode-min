@@ -22,14 +22,6 @@ namespace Antmicro.Renode.UI
             var message = GetFullStackTrace(e);
             SaveErrorToFile(TemporaryFilesManager.Instance.EmulatorTemporaryPath + TemporaryFilesManager.CrashSuffix, message);
             ShowErrorInConsole(message);
-            try 
-            {
-                ApplicationExtensions.InvokeInUIThreadAndWait(() => ShowErrorWindow(message));
-            }
-            catch(Exception)
-            {
-                // there is nothing to do here    
-            }
         }
 
         private static void ShowErrorWindow(string message)

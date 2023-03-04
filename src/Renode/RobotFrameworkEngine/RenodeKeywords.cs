@@ -288,18 +288,6 @@ namespace Antmicro.Renode.RobotFramework
         }
 
         [RobotFrameworkKeyword]
-        public void OpenGUI()
-        {
-            Emulator.OpenGUI();
-        }
-
-        [RobotFrameworkKeyword]
-        public void CloseGUI()
-        {
-            Emulator.CloseGUI();
-        }
-
-        [RobotFrameworkKeyword]
         public void EnableLoggingToCache()
         {
             if(cachedLogFilePath == null)
