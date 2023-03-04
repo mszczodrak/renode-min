@@ -11,6 +11,5 @@
   <ItemGroup>
     <Compile Remove="Terminal\ActiveDetachableIO.cs" />
     <Compile Remove="Terminal\PassiveDetachableIO.cs" />
-    <Compile Remove="Terminal\StreamTerminalIOSource.cs" />
   </ItemGroup>
 </Project>

@@ -115,11 +115,6 @@
     <Compile Include="PlatformDescription\UserInterface\MonitorInitHandler.cs" />
     <Compile Include="PlatformDescription\UserInterface\PlatformDescriptionMachineExtensions.cs" />
     <Compile Include="Connectors\GPIOConnector.cs" />
-    <Compile Include="UI\TerminalWidget.cs" />
-    <Compile Include="UI\LogoRow.cs" />
-    <Compile Include="UI\TerminalIOSource.cs" />
-    <Compile Include="UI\TerminalActions.cs" />
-    <Compile Include="UI\TermsharpProvider.cs" />
     <Compile Include="EmulationEnvironment\EmulationEnvironment.cs" />
     <Compile Include="PlatformDescription\Syntax\EmptyValue.cs" />
     <Compile Include="PlatformDescription\Syntax\IrqDestinations.cs" />
@@ -128,7 +123,6 @@
     <Compile Include="Network\NetworkServer\IServerModule.cs" />
     <Compile Include="Network\NetworkServer\Modules\TftpServerModule.cs" />
     <Compile Include="Integrations\ArduinoLoader.cs" />
-    <Compile Include="Integrations\AsciinemaRecorder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -181,10 +175,6 @@
     <ProjectReference Include="..\..\lib\xwt\Xwt.WPF\Xwt.WPF.csproj" Condition=" $(CurrentPlatform) == 'Windows' And $(GUI_DISABLED) != 'true' ">
       <Project>{c93d746e-1586-4d4f-b411-bf5a966e6a08}</Project>
       <Name>Xwt.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\termsharp\TermSharp-working_copy.csproj">
-      <Project>{25FAECC1-55F0-4608-88BD-4207A7F993B0}</Project>
-      <Name>TermSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-arm.csproj">
       <Project>{13222124-707C-5EFD-8289-2728351FB7E9}</Project>

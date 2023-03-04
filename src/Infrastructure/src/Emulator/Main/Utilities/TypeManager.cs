@@ -810,7 +810,6 @@ namespace Antmicro.Renode.Utilities
             "PangoSharp.dll",
             "protobuf-net.dll",
             "Sprache.dll",
-            "TermSharp.dll",
             "testhost.dll",
             "Xwt.dll",
             "Xwt.Gtk.dll",

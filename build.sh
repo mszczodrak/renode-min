@@ -118,26 +118,7 @@ else
 fi
 
 # Update references to Xwt
-if $NET
-then
-  TERMSHARP_PROJECT="${CURRENT_PATH:=.}/lib/termsharp/TermSharp_NET.csproj"
-  TERMSHARP_PROJECT_COPY="${CURRENT_PATH:=.}/lib/termsharp/TermSharp-working_copy_NET.csproj"
-  if [ ! -e "$TERMSHARP_PROJECT_COPY" ]
-  then
-      cp "$TERMSHARP_PROJECT" "$TERMSHARP_PROJECT_COPY"
-      sed -i.bak 's/"xwt\\Xwt\\Xwt_NET.csproj"/"..\\xwt\\Xwt\\Xwt_NET.csproj"/' "$TERMSHARP_PROJECT_COPY"
-      rm "$TERMSHARP_PROJECT_COPY.bak"
-  fi
-else
-  TERMSHARP_PROJECT="${CURRENT_PATH:=.}/lib/termsharp/TermSharp.csproj"
-  TERMSHARP_PROJECT_COPY="${CURRENT_PATH:=.}/lib/termsharp/TermSharp-working_copy.csproj"
-  if [ ! -e "$TERMSHARP_PROJECT_COPY" ]
-  then
-      cp "$TERMSHARP_PROJECT" "$TERMSHARP_PROJECT_COPY"
-      sed -i.bak 's/"xwt\\Xwt\\Xwt.csproj"/"..\\xwt\\Xwt\\Xwt.csproj"/' "$TERMSHARP_PROJECT_COPY"
-      rm "$TERMSHARP_PROJECT_COPY.bak"
-  fi
-fi
+CURRENT_PATH=.
 
 # Verify Mono and mcs version on Linux and macOS
 if ! $ON_WINDOWS && ! $NET
