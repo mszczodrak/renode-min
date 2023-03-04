@@ -13,7 +13,6 @@ CLEAN=false
 PACKAGES=false
 NIGHTLY=false
 PORTABLE=false
-HEADLESS=false
 NET=false
 TFM="net6.0"
 PARAMS=()
@@ -21,7 +20,7 @@ CUSTOM_PROP=
 NET_FRAMEWORK_VER=
 
 function print_help() {
-  echo "Usage: $0 [-cdvspnt] [-b properties-file.csproj] [--no-gui] [--skip-fetch]"
+  echo "Usage: $0 [-cdvspnt] [-b properties-file.csproj]"
   echo ""
   echo "-c                                clean instead of building"
   echo "-d                                build Debug configuration"
@@ -32,8 +31,6 @@ function print_help() {
   echo "-s                                update submodules"
   echo "-b                                custom build properties file"
   echo "-o                                custom output directory"
-  echo "--skip-fetch                      skip fetching submodules and additional resources"
-  echo "--no-gui                          build with GUI disabled"
   echo "--force-net-framework-version     build against different version of .NET Framework than specified in the solution"
   echo "--net                             build with dotnet"
 }
@@ -69,9 +66,6 @@ do
       ;;
     -)
       case $OPTARG in
-        "no-gui")
-          HEADLESS=true
-          ;;
         "force-net-framework-version")
           shift $((OPTIND-1))
           NET_FRAMEWORK_VER=p:TargetFrameworkVersion=v$1
@@ -112,18 +106,8 @@ fi
 
 . "${ROOT_PATH}/tools/common.sh"
 
-
-if $HEADLESS
-then
-    BUILD_TARGET=Headless
-    PARAMS+=(p:GUI_DISABLED=true)
-elif $ON_WINDOWS
-then
-    BUILD_TARGET=Windows
-    TFM="net6.0-windows10.0.17763.0"
-else
-    BUILD_TARGET=Mono
-fi
+BUILD_TARGET=Headless
+PARAMS+=(p:GUI_DISABLED=true)
 
 if $NET
 then
@@ -223,7 +207,7 @@ then
     fi
     for conf in Debug Release
     do
-      for build_target in Windows Mono Headless
+      for build_target in Headless
       do
         if $NET
         then

@@ -72,11 +72,6 @@ then
     exit 1
 fi
 
-if $ON_WINDOWS && $TRACE
-then
-    echo "Tracing is not available on the Windows platform"
-fi
-
 if ! $ON_WINDOWS && ! $NET
 then
     verify_mono_version
@@ -93,27 +88,4 @@ then
     exec 2>/dev/null
 fi
 
-if $NET
-then
-    if $ON_WINDOWS
-    then
-        TFM="net6.0-windows10.0.17763.0"
-        "${OUTPUT_PATH}/${TARGET}/${TFM}/Renode.exe" "${PARAMS[@]:-}"
-    else
-        if ! $TRACE
-        then
-            TRACE_COMMAND=""
-        else
-            TRACE_COMMAND="dotnet-trace collect --format ${TRACE_FORMAT} --"
-        fi
-        TFM="net6.0"
-        ${TRACE_COMMAND} dotnet "${OUTPUT_PATH}/${TARGET}/${TFM}/Renode.dll" "${PARAMS[@]:-}"
-    fi
-else
-    if $ON_WINDOWS
-    then
-        "${OUTPUT_PATH}/${TARGET}/Renode.exe" "${PARAMS[@]:-}"
-    else
-        $LAUNCHER "${OUTPUT_PATH}/${TARGET}/Renode.exe" "${PARAMS[@]:-}"
-    fi
-fi
+$LAUNCHER "${OUTPUT_PATH}/${TARGET}/Renode.exe" "${PARAMS[@]:-}"
