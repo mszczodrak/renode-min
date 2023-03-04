@@ -17,6 +17,3 @@ log.html
 src/Renode/Properties/AssemblyInfo.cs
 packages
 
-#verilator trace files
-*.vcd
-
