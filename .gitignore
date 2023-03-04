@@ -14,8 +14,6 @@ report.html
 log.html
 
 #resources
-.renode_libs_fetched
-lib/resources/
 src/Renode/Properties/AssemblyInfo.cs
 packages
 

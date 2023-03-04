@@ -7,7 +7,6 @@ export ROOT_PATH="$(cd $(dirname $0); echo $PWD)"
 OUTPUT_DIRECTORY="$ROOT_PATH/output"
 EXPORT_DIRECTORY=""
 
-UPDATE_SUBMODULES=false
 CONFIGURATION="Release"
 BUILD_PLATFORM="Any CPU"
 CLEAN=false
@@ -15,7 +14,6 @@ PACKAGES=false
 NIGHTLY=false
 PORTABLE=false
 HEADLESS=false
-SKIP_FETCH=false
 NET=false
 TFM="net6.0"
 PARAMS=()
@@ -62,9 +60,6 @@ do
     t)
       PORTABLE=true
       ;;
-    s)
-      UPDATE_SUBMODULES=true
-      ;;
     b)
       CUSTOM_PROP=$OPTARG
       ;;
@@ -76,9 +71,6 @@ do
       case $OPTARG in
         "no-gui")
           HEADLESS=true
-          ;;
-        "skip-fetch")
-          SKIP_FETCH=true
           ;;
         "force-net-framework-version")
           shift $((OPTIND-1))
@@ -117,45 +109,9 @@ then
     exit 1
 fi
 
-# We can only update parts of this repository if Renode is built from within the git tree
-if [ ! -e .git ]
-then
-  SKIP_FETCH=true
-  UPDATE_SUBMODULES=false
-fi
-
-if $SKIP_FETCH
-then
-  echo "Skipping init/update of submodules"
-else
-  # Update submodules if not initialized or if requested by the user
-  # Warn if not updating, but unclean
-  # Disabling -e to allow grep to fail
-  set +e
-  git submodule status --recursive | grep -q "^-"
-  SUBMODULES_NOT_INITED=$?
-
-  git submodule status --recursive | grep -q "^+"
-  SUBMODULES_NOT_CLEAN=$?
-  set -e
-  if $UPDATE_SUBMODULES || [ $SUBMODULES_NOT_INITED -eq 0 ]
-  then
-      echo "Updating submodules..."
-      git submodule update --init --recursive
-  elif [ $SUBMODULES_NOT_CLEAN -eq 0 ]
-  then
-      echo "Submodules are not updated. Use -s to force update."
-  fi
-fi
 
 . "${ROOT_PATH}/tools/common.sh"
 
-if $SKIP_FETCH
-then
-  echo "Skipping library fetch"
-else
-  "${ROOT_PATH}"/tools/building/fetch_libraries.sh
-fi
 
 if $HEADLESS
 then
