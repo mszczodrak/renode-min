@@ -11,8 +11,6 @@ OUTPUT_PATH="$ROOT_PATH/output/bin"
 
 TARGET="Release"
 QUIET=false
-TRACE=false
-NET=false
 
 PARAMS=()
 while [[ "$#" -gt 0 ]]
@@ -20,38 +18,10 @@ do
     case $1 in
     -d|--debug)
         TARGET="Debug"
-        if $ON_LINUX
-        then
-            LAUNCHER="$LAUNCHER --debug"
-        fi
+        LAUNCHER="$LAUNCHER --debug"
         ;;
     -q|--quiet)
         QUIET=true
-        ;;
-    --net)
-        NET=true
-        ;;
-    --trace)
-        TRACE=true
-        TRACE_FORMAT=${2:-}
-        case $TRACE_FORMAT in
-            Chromium|chromium)
-                TRACE_FORMAT="Chromium"
-                shift
-                ;;
-            Speedscope|speedscope)
-                TRACE_FORMAT="Speedscope"
-                shift
-                ;;
-            Nettrace|nettrace)
-                TRACE_FORMAT="Nettrace"
-                shift
-                ;;
-            *)
-                # No format specified - use default, don't shift argument list
-                TRACE_FORMAT="Nettrace"
-                ;;
-        esac
         ;;
     *)
         PARAMS+=("$1")
@@ -60,24 +30,9 @@ do
     shift
 done
 
-if ! $NET && $TRACE
-then
-    echo "Tracing is available only on the dotnet target"
-    exit 1
-fi
+verify_mono_version
 
-if [ "$TARGET" == "Release" ] && $TRACE
-then
-    echo "Tracing is available only with the debug target"
-    exit 1
-fi
-
-if ! $ON_WINDOWS && ! $NET
-then
-    verify_mono_version
-fi
-
-if ${REMOTE:-false} && ! $NET
+if ${REMOTE:-false}
 then
     LAUNCHER="$LAUNCHER --debugger-agent=transport=dt_socket,address=0.0.0.0:${REMOTE_PORT:=9876},server=y"
     echo "Waiting for a debugger at port $REMOTE_PORT..."

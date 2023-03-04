@@ -26,7 +26,6 @@ function print_help() {
   echo "-p                                create packages after building"
   echo "-n                                create nightly packages after building"
   echo "-t                                create a portable package (experimental, Linux only)"
-  echo "-s                                update submodules"
   echo "-b                                custom build properties file"
   echo "-o                                custom output directory"
 }
@@ -107,7 +106,6 @@ fi
 
 verify_mono_version
 
-
 # Copy properties file according to the running OS
 mkdir -p "$OUTPUT_DIRECTORY"
 if [ -n "${CUSTOM_PROP}" ]; then
@@ -178,12 +176,6 @@ fi
 
 if [ -n "$EXPORT_DIRECTORY" ]
 then
-    if [ "${DETECTED_OS}" != "linux" ]
-    then
-        echo "Custom output directory is currently available on Linux only"
-        exit 1
-    fi
-
     $ROOT_PATH/tools/packaging/export_${DETECTED_OS}_workdir.sh $EXPORT_DIRECTORY $params
     echo "Renode built to $EXPORT_DIRECTORY"
 fi
@@ -201,11 +193,5 @@ fi
 
 if $PORTABLE
 then
-    if $ON_LINUX
-    then
-      $ROOT_PATH/tools/packaging/make_linux_portable.sh $params
-    else
-      echo "Portable packages are only available on Linux. Exiting!"
-      exit 1
-    fi
+    $ROOT_PATH/tools/packaging/make_linux_portable.sh $params
 fi

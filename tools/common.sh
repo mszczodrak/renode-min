@@ -2,39 +2,20 @@ UNAME=`uname -s`
 if [ "$UNAME" == "Linux" ]
 then
     DETECTED_OS="linux"
-    ON_WINDOWS=false
-    ON_OSX=false
-    ON_LINUX=true
     CS_COMPILER=xbuild
     LAUNCHER="mono"
     PYTHON_RUNNER="python3"
 elif [ "$UNAME" == "Darwin" ]
 then
-    DETECTED_OS="osx"
-    ON_WINDOWS=false
-    ON_OSX=true
-    ON_LINUX=false
-    CS_COMPILER=xbuild
-    LAUNCHER="mono64"
-    PYTHON_RUNNER="python3"
+    echo "OSX not supported"
+    exit 1
 else
-    DETECTED_OS="windows"
-    ON_WINDOWS=true
-    ON_OSX=false
-    ON_LINUX=false
-    CS_COMPILER=MSBuild.exe
-    LAUNCHER=""
-    PYTHON_RUNNER="py -3"
+    echo "Windows not supported"
+    exit 1
 fi
 
 function get_path {
-    if $ON_WINDOWS
-    then
-        var="`cygpath -aw "$1"`"
-        echo -n ${var//\\/\\\\}
-    else
-        echo -n "$1"
-    fi
+    echo -n "$1"
 }
 
 function clone_if_necessary() {
