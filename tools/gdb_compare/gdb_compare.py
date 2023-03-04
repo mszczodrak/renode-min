@@ -101,7 +101,7 @@ class Renode:
             if "renode" in process_name and str(port) in process_name:
                 print("!!! Found another instance of Renode running on the same port. Killing it before proceeding")
                 p.kill()
-        self.proc = pexpect.spawn(f"{binary} --disable-xwt --plain --port {port}", timeout=20)
+        self.proc = pexpect.spawn(f"{binary} --plain --port {port}", timeout=20)
         self.proc.stripcr = True
         self.proc.expect("Monitor available in telnet mode on port")
         self.connection = telnetlib.Telnet("localhost", port)

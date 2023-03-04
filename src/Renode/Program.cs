@@ -86,7 +86,7 @@ namespace Antmicro.Renode
             ConfigurationManager.Initialize(configFile ?? Path.Combine(Emulator.UserDirectoryPath, "config"));
 
             // set Termsharp as a default terminal if there is none already
-            // ConfigurationManager.Instance.Get("general", "terminal", "Termsharp");
+            //ConfigurationManager.Instance.Get("general", "terminal", "Termsharp");
             ConsoleBackend.Instance.ReportRepeatingLines = !ConfigurationManager.Instance.Get("general", "collapse-repeated-log-entries", true);
         }
     }

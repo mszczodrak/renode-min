@@ -23,14 +23,8 @@ namespace Antmicro.Renode.UI
         [Name("config"), Description("Use the configuration file from the provided path, or create one if it does not exist")]
         public string ConfigFile { get; set; }
 
-        [Name("disable-xwt"), DefaultValue(false), Description("Disable XWT GUI support. It automatically sets HideMonitor.")]
-        public bool DisableXwt { get; set; }
-
         [Name("script"), PositionalArgument(0)]
         public string ScriptPath { get; set; }
-
-        [Name("hide-monitor"), DefaultValue(false), Description("Do not show the Monitor window.")]
-        public bool HideMonitor { get; set; }
 
         [Name("hide-log"), DefaultValue(false), Description("Do not show log messages in a console.")]
         public bool HideLog { get; set; }
@@ -57,16 +51,6 @@ namespace Antmicro.Renode.UI
 
         public bool Validate(out string error)
         {
-            if(HideMonitor && Console)
-            {
-                error = "--hide-monitor and --console cannot be set at the same time";
-                return false;
-            }
-
-            if(DisableXwt)
-            {
-                HideMonitor = true;
-            }
 
             error = null;
             return true;

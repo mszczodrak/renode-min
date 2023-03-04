@@ -309,8 +309,6 @@ class RobotTestSuite(object):
         args = [remote_server_binary, '--robot-server-port', str(options.remote_server_port + port_offset)]
         if not options.show_log:
             args.append('--hide-log')
-        if not options.enable_xwt:
-            args.append('--disable-xwt')
         if options.debug_on_error:
             args.append('--robot-debug-on-error')
         if options.keep_temps:

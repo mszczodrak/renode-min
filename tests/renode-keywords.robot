@@ -37,7 +37,7 @@ Setup
     @{PARAMS}=           Create List  --robot-server-port  ${PORT_NUMBER}  --hide-log
 
     IF  ${DISABLE_XWT}
-        Insert Into List  ${PARAMS}  0  --disable-xwt
+        Insert Into List  ${PARAMS}  0 
     END
 
     IF  not ${SKIP_RUNNING_SERVER}

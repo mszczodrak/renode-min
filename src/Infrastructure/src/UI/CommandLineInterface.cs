@@ -60,31 +60,14 @@ namespace Antmicro.Renode.UI
 
             Logger.AddBackend(new MemoryBackend(), "memory");
             Emulator.ShowAnalyzers = !options.HideAnalyzers;
-            XwtProvider xwt = null;
             if(options.PidFile != null)
             {
                 var pid = Process.GetCurrentProcess().Id;
                 File.WriteAllText(options.PidFile, pid.ToString());
             }
 
-            if(!options.DisableXwt || options.RobotDebug)
-            {
-                xwt = XwtProvider.Create(new WindowedUserInterfaceProvider());
-            }
+            options.Port = 1234;
 
-            if(xwt == null && options.RobotFrameworkRemoteServerPort == -1 && !options.Console)
-            {
-                if(options.Port == -1)
-                {
-                    options.Port = 1234;
-                }
-
-                if(!options.DisableXwt)
-                {
-                    Logger.Log(LogLevel.Warning, "Couldn't start UI - falling back to console mode");
-                    options.Console = true;
-                }
-            }
 
             using(var context = ObjectCreator.Instance.OpenContext())
             {
@@ -97,8 +80,8 @@ namespace Antmicro.Renode.UI
 
                 EmulationManager.Instance.ProgressMonitor.Handler = new CLIProgressMonitor();
 
-                var uartAnalyzerType = (xwt == null || options.RobotDebug) ? typeof(LoggingUartAnalyzer) : typeof(ConsoleWindowBackendAnalyzer);
-                var videoAnalyzerType = (xwt == null || options.RobotDebug) ? typeof(DummyVideoAnalyzer) : typeof(VideoAnalyzer);
+                var uartAnalyzerType = (options.RobotDebug) ? typeof(LoggingUartAnalyzer) : typeof(ConsoleWindowBackendAnalyzer);
+                var videoAnalyzerType = (options.RobotDebug) ? typeof(DummyVideoAnalyzer) : typeof(VideoAnalyzer);
 
                 EmulationManager.Instance.CurrentEmulation.BackendManager.SetPreferredAnalyzer(typeof(UARTBackend), uartAnalyzerType);
                 EmulationManager.Instance.CurrentEmulation.BackendManager.SetPreferredAnalyzer(typeof(VideoBackend), videoAnalyzerType);
@@ -118,8 +101,6 @@ namespace Antmicro.Renode.UI
                 Emulator.BeforeExit += () =>
                 {
                     Emulator.DisposeAll();
-                    xwt?.Dispose();
-                    xwt = null;
                 };
 
                 if(beforeRun != null)
@@ -192,41 +173,7 @@ namespace Antmicro.Renode.UI
 
                 Logger.Log(LogLevel.Info, "Monitor available in telnet mode on port {0}", options.Port);
             }
-            else
-            {
-                ConsoleWindowBackendAnalyzer terminal = null;
-                IOProvider io;
-                if(options.HideMonitor)
-                {
-                    io = new IOProvider { Backend = new DummyIOSource() };
-                }
-                else
-                {
-                    terminal = new ConsoleWindowBackendAnalyzer(true);
-                    io = terminal.IO;
-                }
 
-                // forcing vcursor is necessary, because calibrating will never end if the window is not shown
-                shell = ShellProvider.GenerateShell(monitor, forceVCursor: options.HideMonitor);
-                shell.Terminal = new NavigableTerminalEmulator(io, options.HideMonitor);
-                monitor.Quitted += shell.Stop;
-
-                if(terminal != null)
-                {
-                    try
-                    {
-                        Emulator.BeforeExit += shell.Stop;
-                        terminal.Quitted += Emulator.Exit;
-                        terminal.Show();
-                    }
-                    catch(InvalidOperationException ex)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Error.WriteLine(ex.Message);
-                        Emulator.Exit();
-                    }
-                }
-            }
             shell.Quitted += Emulator.Exit;
 
             monitor.Interaction = shell.Writer;
