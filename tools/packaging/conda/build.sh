@@ -29,21 +29,6 @@ if [[ "$(uname)" == 'Linux' ]]; then
     install -D /usr/lib/x86_64-linux-gnu/gtk-2.0/modules/libatk-bridge.so $PREFIX/lib/libatk-bridge.so
 
     sed -i 's/\/usr\/lib\/cli\/.*-sharp-2.0\///g' $PREFIX/opt/renode/bin/*.dll.config
-else
-    _os_name=macos
-
-    cp /Library/Frameworks/Mono.framework/Libraries/libatksharpglue-2* $PREFIX/lib/
-    cp /Library/Frameworks/Mono.framework/Libraries/libgtksharpglue-2* $PREFIX/lib/
-    cp /Library/Frameworks/Mono.framework/Libraries/libgdksharpglue-2* $PREFIX/lib/
-    cp /Library/Frameworks/Mono.framework/Libraries/libglibsharpglue-2* $PREFIX/lib/
-
-    mkdir -p $BUILD_PREFIX/lib/mono/4.5-api/
-    find /Library/Frameworks/Mono.framework/Versions/5*/lib/mono/* -name 'gtk-sharp.dll*' -exec cp '{}' $BUILD_PREFIX/lib/mono/4.5-api/ ';'
-    find /Library/Frameworks/Mono.framework/Versions/5*/lib/mono/* -name 'gdk-sharp.dll*' -exec cp '{}' $BUILD_PREFIX/lib/mono/4.5-api/ ';'
-    find /Library/Frameworks/Mono.framework/Versions/5*/lib/mono/* -name 'atk-sharp.dll*' -exec cp '{}' $BUILD_PREFIX/lib/mono/4.5-api/ ';'
-    find /Library/Frameworks/Mono.framework/Versions/5*/lib/mono/* -name 'glib-sharp.dll*' -exec cp '{}' $BUILD_PREFIX/lib/mono/4.5-api/ ';'
-    find /Library/Frameworks/Mono.framework/Versions/5*/lib/mono/* -name 'pango-sharp.dll*' -exec cp '{}' $BUILD_PREFIX/lib/mono/4.5-api/ ';'
-    cp /usr/lib/libc.dylib $PREFIX/lib/
 fi
 
 ./build.sh

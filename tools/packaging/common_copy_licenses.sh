@@ -49,8 +49,6 @@ CUSTOM_TARGET_NAME_VALUES=(
 #   has to be synced with the 'get_os_specific_licenses' function.
 OS_SPECIFIC_LICENSES=(
     "libopenlibm"  # Linux
-    "macos_run.command"  # macOS
-    "mingw winpthreads"  # Windows
 )
 
 
@@ -60,7 +58,7 @@ function exit_invalid_args {
     exit_with_error \
       "Invalid arguments: $@" \
       "" \
-      "Usage: $(basename $0) <DESTINATION_DIR> <linux/macos/windows>"
+      "Usage: $(basename $0) <DESTINATION_DIR> <linux>"
 }
 
 function exit_with_error {
@@ -88,10 +86,6 @@ function get_custom_target_name {
 function get_os_specific_licenses {
     if [ "$OS" = linux ]; then
         index=0
-    elif [ "$OS" = macos ]; then
-        index=1
-    elif [ "$OS" = windows ]; then
-        index=2
     fi
     echo "${OS_SPECIFIC_LICENSES[$index]}"
 }
@@ -106,10 +100,6 @@ fi
 BASE="$(dirname $0)/../.."
 TARGET="$1"
 OS="$2"
-
-if [ "$OS" != linux ] && [ "$OS" != macos ] && [ "$OS" != windows ]; then
-    exit_invalid_args $@
-fi
 
 _resources_dir="lib/resources/libraries"
 if ! [ -d $BASE/$_resources_dir ]; then
