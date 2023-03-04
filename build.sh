@@ -13,11 +13,9 @@ CLEAN=false
 PACKAGES=false
 NIGHTLY=false
 PORTABLE=false
-NET=false
 TFM="net6.0"
 PARAMS=()
 CUSTOM_PROP=
-NET_FRAMEWORK_VER=
 
 function print_help() {
   echo "Usage: $0 [-cdvspnt] [-b properties-file.csproj]"
@@ -31,8 +29,6 @@ function print_help() {
   echo "-s                                update submodules"
   echo "-b                                custom build properties file"
   echo "-o                                custom output directory"
-  echo "--force-net-framework-version     build against different version of .NET Framework than specified in the solution"
-  echo "--net                             build with dotnet"
 }
 
 while getopts "cdvpnstbo:-:" opt
@@ -66,16 +62,6 @@ do
       ;;
     -)
       case $OPTARG in
-        "force-net-framework-version")
-          shift $((OPTIND-1))
-          NET_FRAMEWORK_VER=p:TargetFrameworkVersion=v$1
-          PARAMS+=($NET_FRAMEWORK_VER)
-          OPTIND=2
-          ;;
-        "net")
-          NET=true
-          PARAMS+=(p:NET=true)
-          ;;
         *)
           print_help
           exit 1
@@ -108,67 +94,42 @@ fi
 
 BUILD_TARGET=Headless
 PARAMS+=(p:GUI_DISABLED=true)
-
-if $NET
-then
-  CS_COMPILER="dotnet build"
-  TARGET="`get_path \"$PWD/Renode_NET.sln\"`"
-else
-  TARGET="`get_path \"$PWD/Renode.sln\"`"
-fi
-
-# Update references to Xwt
+TARGET="`get_path \"$PWD/Renode.sln\"`"
 CURRENT_PATH=.
 
 # Verify Mono and mcs version on Linux and macOS
-if ! $ON_WINDOWS && ! $NET
+if ! [ -x "$(command -v mcs)" ]
 then
-    if ! [ -x "$(command -v mcs)" ]
-    then
-        MINIMUM_MONO=`get_min_mono_version`
-        echo "mcs not found. Renode requries Mono $MINIMUM_MONO or newer. Please refer to documentation for installation instructions. Exiting!"
-        exit 1
-    fi
-
-    verify_mono_version
+    MINIMUM_MONO=`get_min_mono_version`
+    echo "mcs not found. Renode requries Mono $MINIMUM_MONO or newer. Please refer to documentation for installation instructions. Exiting!"
+    exit 1
 fi
+
+verify_mono_version
+
 
 # Copy properties file according to the running OS
 mkdir -p "$OUTPUT_DIRECTORY"
 if [ -n "${CUSTOM_PROP}" ]; then
     PROP_FILE=$CUSTOM_PROP
 else
-    if $ON_OSX
-    then
-      PROP_FILE="$CURRENT_PATH/src/Infrastructure/src/Emulator/Cores/osx-properties.csproj"
-    elif $ON_LINUX
-    then
-      PROP_FILE="$CURRENT_PATH/src/Infrastructure/src/Emulator/Cores/linux-properties.csproj"
-    else
-      PROP_FILE="$CURRENT_PATH/src/Infrastructure/src/Emulator/Cores/windows-properties.csproj"
-    fi
+    PROP_FILE="$CURRENT_PATH/src/Infrastructure/src/Emulator/Cores/linux-properties.csproj"
 fi
 cp "$PROP_FILE" "$OUTPUT_DIRECTORY/properties.csproj"
 
-if ! $NET
-then
-  # Assets files are not deleted during `dotnet clean`, as it would confuse intellisense per comment in https://github.com/NuGet/Home/issues/7368#issuecomment-457411014,
-  # but we need to delete them to build Renode again for .NETFramework since `project.assets.json` doesn't play well if project files share the same directory.
-  # If `Renode_NET.sln` is picked for OmniSharp, it will trigger reanalysis of the project after removing assets files.
-  # We don't remove these files as part of `clean` target, because other intermediate files are well separated between .NET and .NETFramework
-  # and enforcing `clean` every time before rebuilding would slow down the build process on both frameworks.
-  find $ROOT_PATH -type f -name 'project.assets.json' -delete
-fi
+# Assets files are not deleted during `dotnet clean`, as it would confuse intellisense per comment in https://github.com/NuGet/Home/issues/7368#issuecomment-457411014,
+# but we need to delete them to build Renode again for .NETFramework since `project.assets.json` doesn't play well if project files share the same directory.
+# If `Renode_NET.sln` is picked for OmniSharp, it will trigger reanalysis of the project after removing assets files.
+# We don't remove these files as part of `clean` target, because other intermediate files are well separated between .NET and .NETFramework
+# and enforcing `clean` every time before rebuilding would slow down the build process on both frameworks.
+find $ROOT_PATH -type f -name 'project.assets.json' -delete
 
 # Build CCTask in Release configuration
 CCTASK_OUTPUT=`mktemp`
-CCTASK_BUILD_ARGS=($NET_FRAMEWORK_VER p:Configuration=Release p:Platform="\"$BUILD_PLATFORM\"")
+CCTASK_BUILD_ARGS=(p:Configuration=Release p:Platform="\"$BUILD_PLATFORM\"")
 set +e
 CCTASK_SLN=CCTask.sln
-if $NET
-then
-    CCTASK_SLN=CCTask_NET.sln
-fi
+
 eval "$CS_COMPILER $(build_args_helper "${CCTASK_BUILD_ARGS[@]}") $(get_path $ROOT_PATH/lib/cctask/$CCTASK_SLN)" 2>&1 > $CCTASK_OUTPUT
 
 if [ $? -ne 0 ]; then
@@ -182,20 +143,12 @@ set -e
 # clean instead of building
 if $CLEAN
 then
-    if ! $NET
-    then
-      PARAMS+=(t:Clean)
-    fi
+    PARAMS+=(t:Clean)
     for conf in Debug Release
     do
       for build_target in Headless
       do
-        if $NET
-        then
-            dotnet clean $(build_args_helper ${PARAMS[@]}) $(build_args_helper p:Configuration=${conf}${build_target}) "$TARGET"
-        else
-            $CS_COMPILER $(build_args_helper ${PARAMS[@]}) $(build_args_helper p:Configuration=${conf}${build_target}) "$TARGET"
-        fi
+        $CS_COMPILER $(build_args_helper ${PARAMS[@]}) $(build_args_helper p:Configuration=${conf}${build_target}) "$TARGET"
       done
       rm -fr $OUTPUT_DIRECTORY/bin/$conf
     done
@@ -213,12 +166,7 @@ PARAMS+=(p:Configuration=${CONFIGURATION}${BUILD_TARGET} p:GenerateFullPaths=tru
 eval "$CS_COMPILER $(build_args_helper "${PARAMS[@]}") $TARGET"
 
 # copy llvm library
-if $NET
-then
-  cp src/Infrastructure/src/Emulator/Peripherals/bin/$CONFIGURATION/$TFM/libllvm-disas.* output/bin/$CONFIGURATION/$TFM
-else
-  cp src/Infrastructure/src/Emulator/Peripherals/bin/$CONFIGURATION/libllvm-disas.* output/bin/$CONFIGURATION
-fi
+cp src/Infrastructure/src/Emulator/Peripherals/bin/$CONFIGURATION/libllvm-disas.* output/bin/$CONFIGURATION
 
 # build packages after successful compilation
 params=""
@@ -240,7 +188,7 @@ then
     echo "Renode built to $EXPORT_DIRECTORY"
 fi
 
-if $PACKAGES && ! $NET
+if $PACKAGES
 then
     if $NIGHTLY
     then
@@ -251,7 +199,7 @@ then
     $ROOT_PATH/tools/packaging/make_source_package.sh $params
 fi
 
-if $PORTABLE && ! $NET
+if $PORTABLE
 then
     if $ON_LINUX
     then
