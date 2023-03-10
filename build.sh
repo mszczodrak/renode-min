@@ -10,9 +10,6 @@ EXPORT_DIRECTORY=""
 CONFIGURATION="Release"
 BUILD_PLATFORM="Any CPU"
 CLEAN=false
-PACKAGES=false
-NIGHTLY=false
-PORTABLE=false
 TFM="net6.0"
 PARAMS=()
 CUSTOM_PROP=
@@ -22,9 +19,6 @@ function print_help() {
   echo ""
   echo "-c                                clean instead of building"
   echo "-v                                verbose output"
-  echo "-p                                create packages after building"
-  echo "-n                                create nightly packages after building"
-  echo "-t                                create a portable package (experimental, Linux only)"
   echo "-b                                custom build properties file"
   echo "-o                                custom output directory"
 }
@@ -37,16 +31,6 @@ do
       ;;
     v)
       PARAMS+=(verbosity:detailed)
-      ;;
-    p)
-      PACKAGES=true
-      ;;
-    n)
-      NIGHTLY=true
-      PACKAGES=true
-      ;;
-    t)
-      PORTABLE=true
       ;;
     b)
       CUSTOM_PROP=$OPTARG
@@ -165,24 +149,3 @@ cp src/Infrastructure/src/Emulator/Peripherals/bin/$CONFIGURATION/libllvm-disas.
 # build packages after successful compilation
 params=""
 
-if [ -n "$EXPORT_DIRECTORY" ]
-then
-    $ROOT_PATH/tools/packaging/export_${DETECTED_OS}_workdir.sh $EXPORT_DIRECTORY $params
-    echo "Renode built to $EXPORT_DIRECTORY"
-fi
-
-if $PACKAGES
-then
-    if $NIGHTLY
-    then
-      params="$params -n"
-    fi
-
-    $ROOT_PATH/tools/packaging/make_${DETECTED_OS}_packages.sh $params
-    $ROOT_PATH/tools/packaging/make_source_package.sh $params
-fi
-
-if $PORTABLE
-then
-    $ROOT_PATH/tools/packaging/make_linux_portable.sh $params
-fi

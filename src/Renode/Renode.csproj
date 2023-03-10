@@ -108,7 +108,6 @@
     <Compile Include="RobotFrameworkEngine\CpuKeywords.cs" />
     <Compile Include="Network\RangeLossMediumFunction.cs" />
     <Compile Include="Network\RangeMediumFunction.cs" />
-    <Compile Include="Backends\Terminals\UartPtyTerminal.cs" />
     <Compile Include="PlatformDescription\UserInterface\MonitorInitHandler.cs" />
     <Compile Include="PlatformDescription\UserInterface\PlatformDescriptionMachineExtensions.cs" />
     <Compile Include="Connectors\GPIOConnector.cs" />
@@ -242,9 +241,6 @@
     <EmbeddedResource Include="..\..\lib\resources\images\Renode-logo.png">
       <Link>Resources\logo.png</Link>
       <LogicalName>logo.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\RobotoMono-Regular.ttf">
-      <LogicalName>RobotoMono-Regular.ttf</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <Target Name="CreateAssemblyVersionInfo" BeforeTargets="PrepareForBuild">
