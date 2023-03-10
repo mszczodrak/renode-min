@@ -5,14 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch - Debug",
-            "preLaunchTask": "Build - Debug",
-            "type": "mono",
-            "request": "launch",
-            "program": "${workspaceRoot}/output/bin/Debug/Renode.exe",
-            "cwd": "${workspaceRoot}",
-        },
-        {
             "name": "Launch - Release",
             "preLaunchTask": "Build - Release",
             "type": "mono",

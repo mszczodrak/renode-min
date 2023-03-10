@@ -127,7 +127,6 @@ The optional ``[file]`` argument allows you to provide the path to a script to b
 
 The script allows several optional flags, the most useful of which are presented below::
 
-   -d            debug mode (requires prior build in debug configuration) - only available when built from source
    -e COMMAND    execute a command on startup (executed after the [file] argument)
    -p            remove ANSI escape codes (e.g., colors) from the output
    -P PORT       listen on a port for Monitor commands instead of opening a window

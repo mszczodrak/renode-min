@@ -18,10 +18,9 @@ PARAMS=()
 CUSTOM_PROP=
 
 function print_help() {
-  echo "Usage: $0 [-cdvspnt] [-b properties-file.csproj]"
+  echo "Usage: $0 [-cvspnt] [-b properties-file.csproj]"
   echo ""
   echo "-c                                clean instead of building"
-  echo "-d                                build Debug configuration"
   echo "-v                                verbose output"
   echo "-p                                create packages after building"
   echo "-n                                create nightly packages after building"
@@ -35,9 +34,6 @@ do
   case $opt in
     c)
       CLEAN=true
-      ;;
-    d)
-      CONFIGURATION="Debug"
       ;;
     v)
       PARAMS+=(verbosity:detailed)
@@ -142,7 +138,7 @@ set -e
 if $CLEAN
 then
     PARAMS+=(t:Clean)
-    for conf in Debug Release
+    for conf in Release
     do
       for build_target in Headless
       do
@@ -168,11 +164,6 @@ cp src/Infrastructure/src/Emulator/Peripherals/bin/$CONFIGURATION/libllvm-disas.
 
 # build packages after successful compilation
 params=""
-
-if [ $CONFIGURATION == "Debug" ]
-then
-    params="$params -d"
-fi
 
 if [ -n "$EXPORT_DIRECTORY" ]
 then

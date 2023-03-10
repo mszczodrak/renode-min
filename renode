@@ -16,10 +16,6 @@ PARAMS=()
 while [[ "$#" -gt 0 ]]
 do
     case $1 in
-    -d|--debug)
-        TARGET="Debug"
-        LAUNCHER="$LAUNCHER --debug"
-        ;;
     -q|--quiet)
         QUIET=true
         ;;
@@ -31,12 +27,6 @@ do
 done
 
 verify_mono_version
-
-if ${REMOTE:-false}
-then
-    LAUNCHER="$LAUNCHER --debugger-agent=transport=dt_socket,address=0.0.0.0:${REMOTE_PORT:=9876},server=y"
-    echo "Waiting for a debugger at port $REMOTE_PORT..."
-fi
 
 if ${QUIET:-false}
 then
