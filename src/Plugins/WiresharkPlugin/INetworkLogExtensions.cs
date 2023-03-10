@@ -205,10 +205,6 @@ namespace Antmicro.Renode.Plugins.WiresharkPlugin
         private const string BLELogName = WiresharkExternalPrefix + "-" + "allBLETraffic";
         private const string IEEE802_15_4LogName = WiresharkExternalPrefix + "-" + "allIEEE802_15_4Traffic";
         private const string EthernetLogName = WiresharkExternalPrefix + "-" + "allEthernetTraffic";
-#if PLATFORM_WINDOWS
-        private const string WiresharkPath = @"c:\Program Files\Wireshark\Wireshark.exe";
-#else
         private const string WiresharkPath = "/usr/bin/wireshark";
-#endif
     }
 }

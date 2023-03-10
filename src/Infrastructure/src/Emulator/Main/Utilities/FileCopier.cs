@@ -7,9 +7,7 @@
 //
 using System;
 using System.IO;
-#if !PLATFORM_WINDOWS
 using Mono.Unix.Native;
-#endif
 using System.Runtime.InteropServices;
 using Antmicro.Renode.Exceptions;
 using Antmicro.Renode.Core;
@@ -21,8 +19,7 @@ namespace Antmicro.Renode.Utilities
         public static void Copy(string src, string dst, bool overwrite = false)
         {
             try
-            {
-#if !PLATFORM_WINDOWS                
+            {             
                 if (ConfigurationManager.Instance.Get("file-system", "use-cow", false))
                 {
                     int sfd = -1, dfd = -1;
@@ -49,7 +46,6 @@ namespace Antmicro.Renode.Utilities
                         }
                     }
                 }
-#endif
  
                 var lastTime = CustomDateTime.Now;
                 using(var source = File.Open(src, FileMode.Open, FileAccess.Read))
@@ -86,10 +82,8 @@ namespace Antmicro.Renode.Utilities
             }
         }
 
-#if !PLATFORM_WINDOWS
         [DllImport("libc")]
         private extern static int ioctl(int d, ulong request, int a);
-#endif
     }
 }
 

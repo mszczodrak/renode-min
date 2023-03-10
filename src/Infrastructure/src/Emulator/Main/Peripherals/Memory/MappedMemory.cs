@@ -21,32 +21,12 @@ using System.Threading;
 using LZ4;
 using Antmicro.Renode.UserInterface;
 using Antmicro.Renode.Core;
-#if PLATFORM_WINDOWS
-using System.Reflection.Emit;
-using System.Reflection;
-#endif
 
 namespace Antmicro.Renode.Peripherals.Memory
 {
     [Icon("memory")]
     public sealed class MappedMemory : IBytePeripheral, IWordPeripheral, IDoubleWordPeripheral, IMapped, IDisposable, IKnownSize, ISpeciallySerializable, IMemory, IMultibyteWritePeripheral
     {
-#if PLATFORM_WINDOWS
-        static MappedMemory()
-        {
-            var dynamicMethod = new DynamicMethod("Memset", MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard,
-                null, new [] { typeof(IntPtr), typeof(byte), typeof(int) }, typeof(MappedMemory), true);
-
-            var generator = dynamicMethod.GetILGenerator();
-            generator.Emit(OpCodes.Ldarg_0);
-            generator.Emit(OpCodes.Ldarg_1);
-            generator.Emit(OpCodes.Ldarg_2);
-            generator.Emit(OpCodes.Initblk);
-            generator.Emit(OpCodes.Ret);
-
-            MemsetDelegate = (Action<IntPtr, byte, int>)dynamicMethod.CreateDelegate(typeof(Action<IntPtr, byte, int>));
-        }
-#endif
 
         public MappedMemory(Machine machine, long size, int? segmentSize = null)
         {
@@ -554,17 +534,8 @@ namespace Antmicro.Renode.Peripherals.Memory
             return registrationPointsCached;
         }
 
-#if PLATFORM_WINDOWS
-        private static void MemSet(IntPtr pointer, byte value, int length)
-        {
-            MemsetDelegate(pointer, value, length);
-        }
-
-        private static Action<IntPtr, byte, int> MemsetDelegate;
-#else
         [DllImport("libc", EntryPoint = "memset")]
         private static extern IntPtr MemSet(IntPtr pointer, byte value, int length);
-#endif
 
         private readonly bool emptyCtorUsed;
         private IntPtr[] segments;

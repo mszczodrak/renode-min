@@ -134,7 +134,6 @@
     <Compile Include="Hooks\BusPeripheralsHooksPythonEngine.cs" />
     <Compile Include="Hooks\SystemBusHooksExtensions.cs" />
     <Compile Include="Hooks\WatchpointHookPythonEngine.cs" />
-    <Compile Include="HostInterfaces\Network\WindowsTapInterface.cs" />
     <Compile Include="HostInterfaces\Network\LinuxTapInterface.cs" />
     <Compile Include="HostInterfaces\Network\ITapInterface.cs" />
     <Compile Include="Utilities\GDB\Commands\WriteDataToMemoryCommand.cs" />

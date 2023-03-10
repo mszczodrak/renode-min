@@ -19,11 +19,7 @@ namespace Antmicro.Renode.HostInterfaces.Network
         public static IMACInterface CreateAndGetTap(this Emulation emulation, string hostInterfaceName, string name, bool persistent = false)
         {
             ITapInterface result;
-#if PLATFORM_WINDOWS
-            result = new WindowsTapInterface(hostInterfaceName);
-#else
             result = new LinuxTapInterface(hostInterfaceName, persistent);
-#endif
 
             emulation.HostMachine.AddHostMachineElement(result, name);
             return result;

@@ -4,7 +4,6 @@
 // This file is licensed under the MIT License.
 // Full license text is available in 'licenses/MIT.txt'.
 //
-#if !PLATFORM_WINDOWS
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -119,5 +118,3 @@ namespace Antmicro.Renode.UI
         private const string ScreenTool = "screen";
     }
 }
-
-#endif

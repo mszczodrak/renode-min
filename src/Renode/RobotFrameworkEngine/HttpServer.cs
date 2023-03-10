@@ -27,11 +27,7 @@ namespace Antmicro.Renode.RobotFramework
         public void Run(int port)
         {
             Logger.Log(LogLevel.Info, "Robot Framework remote server is listening on port {0}", port);
-#if PLATFORM_WINDOWS
-            listener.Prefixes.Add($"http://localhost:{port}/");
-#else
             listener.Prefixes.Add($"http://*:{port}/");
-#endif
             listenerThread.Start();
             listenerThread.Join();
         }

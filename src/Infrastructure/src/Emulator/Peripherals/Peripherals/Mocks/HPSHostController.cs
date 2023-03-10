@@ -16,9 +16,7 @@ using Antmicro.Renode.Peripherals.I2C;
 using Antmicro.Renode.Time;
 using Antmicro.Renode.UserInterface;
 using Antmicro.Renode.Utilities;
-#if !PLATFORM_WINDOWS
 using Mono.Unix;
-#endif
 
 namespace Antmicro.Renode.Extensions.Mocks
 {
@@ -395,9 +393,6 @@ namespace Antmicro.Renode.Extensions.Mocks
 
         public void StartSocketServer(TimeInterval timeInterval)
         {  
-#if PLATFORM_WINDOWS
-            throw new RecoverableException("This method is not supported on Windows");
-#else
             string path = "/tmp/i2c.sock";
             if(File.Exists(path))
             {
@@ -479,7 +474,6 @@ namespace Antmicro.Renode.Extensions.Mocks
                         break;
                 }
             }
-#endif
         }
 
         private int GetLength(Socket connection)

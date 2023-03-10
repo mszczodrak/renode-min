@@ -452,7 +452,6 @@
     <Compile Include="Peripherals\CPU\ExecutionMode.cs" />
     <Compile Include="Peripherals\CPU\ExecutionResult.cs" />
     <Compile Include="Utilities\MemberReferenceExtensions.cs" />
-    <Compile Include="Utilities\WindowsFileLocker.cs" />
     <Compile Include="Peripherals\Wireless\Position.cs" />
     <Compile Include="Peripherals\Wireless\IMediumFunction.cs" />
     <Compile Include="Peripherals\Wireless\SimpleMediumFunction.cs" />

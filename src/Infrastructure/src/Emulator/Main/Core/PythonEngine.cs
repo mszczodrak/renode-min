@@ -36,12 +36,7 @@ namespace Antmicro.Renode.Core
             "import clr",
             "clr.AddReference('Emulator')",
             "clr.AddReference('Renode')",
-        #if NET
-            "clr.AddReference('System.Console')", // It was moved to separate assembly on .NET Core.
-        #endif
-        #if !NET
             "clr.AddReference('IronPython.StdLib')", // It is referenced by default on NET Core, but not on mono.
-        #endif
             "import Antmicro.Renode",
             "import System",
             "import time",

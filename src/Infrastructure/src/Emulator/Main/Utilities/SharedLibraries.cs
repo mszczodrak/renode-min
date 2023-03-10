@@ -45,13 +45,9 @@ namespace Antmicro.Renode.Utilities
 
         public static bool TryLoadLibrary(string path, out IntPtr address)
         {
-#if PLATFORM_WINDOWS
-            address = WindowsLoadLibrary(path);
-#else
             //HACK: returns 0 on first call, somehow
             dlerror();
             address = dlopen(path, 2); //relocation now (RTLD_NOW)
-#endif
             return address != IntPtr.Zero;
         }
 
@@ -63,19 +59,11 @@ namespace Antmicro.Renode.Utilities
         /// </param>
         public static void UnloadLibrary(IntPtr address)
         {
-#if PLATFORM_WINDOWS
-            var result = WindowsCloseLibrary(address);
-            if (!result)
-            {
-                HandleError("unloading");
-            }
-#else
             var result = dlclose(address);
             if (result != 0)
             {
                 HandleError("unloading");
             }
-#endif
         }
 
         /// <summary>
@@ -124,11 +112,7 @@ namespace Antmicro.Renode.Utilities
         /// </param>
         public static IntPtr GetSymbolAddress(IntPtr libraryAddress, string name)
         {
-#if PLATFORM_WINDOWS
-            var address = WindowsGetSymbolAddress(libraryAddress, name);
-#else
             var address = dlsym(libraryAddress, name);
-#endif
             if (address == IntPtr.Zero)
             {
                 HandleError("getting symbol from");
@@ -139,36 +123,14 @@ namespace Antmicro.Renode.Utilities
         private static void HandleError(string operation)
         {
             string message = null;
-#if PLATFORM_WINDOWS
-            var errno = Marshal.GetLastWin32Error();
-            //For an unknown reason, in some cases, Windows doesn't set error code.
-            if(errno != 0)
-            {
-                message = new Win32Exception(errno).Message;
-            }
-#else
             var messagePtr = dlerror();
             if(messagePtr != IntPtr.Zero)
             {
                 message = Marshal.PtrToStringAuto(messagePtr);
             }
-#endif
             throw new InvalidOperationException(string.Format("Error while {1} dynamic library: {0}", message ?? "unknown error", operation));
         }
 
-#if PLATFORM_WINDOWS
-        [DllImport("kernel32", SetLastError=true, CharSet = CharSet.Ansi, EntryPoint="LoadLibrary")]
-        static extern IntPtr WindowsLoadLibrary([MarshalAs(UnmanagedType.LPStr)]string lpFileName);
-
-        [DllImport("kernel32.dll", EntryPoint="GetProcAddress")]
-        public static extern IntPtr WindowsGetSymbolAddress(IntPtr hModule, string symbolName);
-
-        [DllImport("kernel32.dll", EntryPoint="FreeLibrary")]
-        public static extern bool WindowsCloseLibrary(IntPtr hModule);
-
-        [DllImport("kernel32.dll", EntryPoint="GetLastError")]
-        public static extern UInt32 WindowsGetLastError();
-#elif PLATFORM_LINUX
         [DllImport("libdl.so.2")]
         private static extern IntPtr dlopen(string file, int mode);
 
@@ -180,19 +142,6 @@ namespace Antmicro.Renode.Utilities
 
         [DllImport("libdl.so.2")]
         private static extern int dlclose(IntPtr handle);
-#else
-        [DllImport("dl")]
-        private static extern IntPtr dlopen(string file, int mode);
-
-        [DllImport("dl")]
-        private static extern IntPtr dlerror();
-
-        [DllImport("dl")]
-        private static extern IntPtr dlsym(IntPtr handle, string name);
-
-        [DllImport("dl")]
-        private static extern int dlclose(IntPtr handle);
-#endif
     }
 }
 

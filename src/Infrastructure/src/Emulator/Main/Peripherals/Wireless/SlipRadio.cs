@@ -6,7 +6,6 @@
 //
 using Antmicro.Renode.Core;
 using Antmicro.Renode.Exceptions;
-#if !PLATFORM_WINDOWS
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +16,6 @@ using Antmicro.Migrant;
 using Antmicro.Migrant.Hooks;
 using AntShell.Terminal;
 using Mono.Unix;
-#endif
 
 namespace Antmicro.Renode.Peripherals.Wireless
 {
@@ -25,15 +23,12 @@ namespace Antmicro.Renode.Peripherals.Wireless
     {
         public static void CreateSlipRadio(this Emulation emulation, string name, string fileName)
         {
-#if !PLATFORM_WINDOWS
+
             emulation.ExternalsManager.AddExternal(new SlipRadio(fileName), name);
-#else
-            throw new RecoverableException("Creating SlipRadio is not supported on Windows.");
-#endif
         }
     }
 
-#if !PLATFORM_WINDOWS
+
     public class SlipRadio : ISlipRadio
     {
         public SlipRadio(string linkName)
@@ -225,5 +220,4 @@ namespace Antmicro.Renode.Peripherals.Wireless
         private const byte ESC_END = 0xDC;
         private const byte ESC_ESC = 0xDD;
     }
-#endif
 }

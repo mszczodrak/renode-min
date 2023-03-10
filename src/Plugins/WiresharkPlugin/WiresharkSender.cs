@@ -48,10 +48,8 @@ namespace Antmicro.Renode.Plugins.WiresharkPlugin
             if(wiresharkPipe != null)
             {
                 wiresharkPipe.Close();
-#if !PLATFORM_WINDOWS
                 //As named pipes on Linux have their entries in the filesystem, we remove it as a cleanup.
                 File.Delete(pipeName);
-#endif
             }
         }
 
@@ -63,15 +61,9 @@ namespace Antmicro.Renode.Plugins.WiresharkPlugin
             }
             lastReportedFrame = null;
 
-#if !PLATFORM_WINDOWS
             // Mono is using the "/var/tmp" prefix for pipes by default.
             // Because of problems with setting GID bit on OSX in that directory, we combine this default path with an absolute EmulatorTemporaryPath value, which effectively overwrites the default - Path.Combine of two absolute paths drops the first one.
             wiresharkPipe = new NamedPipeServerStream(GetPrefixedPipeName(), PipeDirection.Out, 1, PipeTransmissionMode.Byte, NamedPipeOptions);
-#else
-            // Windows does not let you override the prefix with the trick above, and as such it requires a prefixless
-            // name for the named pipe to work, while Wireshark needs the prefixed name as the argument.
-            wiresharkPipe = new NamedPipeServerStream(pipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, NamedPipeOptions);
-#endif
             wiresharkProces = new Process();
             wiresharkProces.EnableRaisingEvents = true;
 
@@ -214,13 +206,9 @@ namespace Antmicro.Renode.Plugins.WiresharkPlugin
 
         private static readonly DateTime localEpoch = Misc.UnixEpoch.ToLocalTime();
 
-#if !PLATFORM_WINDOWS
         private string namedPipePrefix = Utilities.TemporaryFilesManager.Instance.EmulatorTemporaryPath;
         private const PipeOptions NamedPipeOptions = PipeOptions.None;
-#else
-        private string namedPipePrefix = @"\\.\pipe\";
-        private const PipeOptions NamedPipeOptions = PipeOptions.Asynchronous;
-#endif
+
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         struct PcapPacketHeader

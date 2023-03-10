@@ -19,10 +19,8 @@ using Antmicro.Renode.Core;
 using Antmicro.Renode.Logging;
 using Antmicro.Renode.Peripherals.Bus;
 using Antmicro.Renode.Utilities;
-#if !PLATFORM_WINDOWS
 using Mono.Unix;
 using Mono.Unix.Native;
-#endif
 using Antmicro.Renode.UserInterface;
 
 namespace Antmicro.Renode.Peripherals.Miscellaneous
@@ -121,10 +119,8 @@ namespace Antmicro.Renode.Peripherals.Miscellaneous
         {
             switch((Register)offset)
             {
-#if !PLATFORM_WINDOWS
             case Register.ReceiveFileFromEmulator:
                 return HandleReceiveFile();
-#endif
             case Register.SendFileToEmulator:
                 return HandleSendFile();
             case Register.SendReceiveController:
@@ -265,7 +261,6 @@ namespace Antmicro.Renode.Peripherals.Miscellaneous
                 break;
             }
         }
-#if !PLATFORM_WINDOWS
         private uint HandleReceiveFile()
         {
             var transferFileName = GetCurrentStringRegister();
@@ -283,7 +278,6 @@ namespace Antmicro.Renode.Peripherals.Miscellaneous
                 return 0;
             }
         }
-#endif
 
         private uint HandleSendFile()
         {
@@ -338,11 +332,7 @@ namespace Antmicro.Renode.Peripherals.Miscellaneous
             {
                 if(state == State.ReceivePermisions)
                 {
-#if !PLATFORM_WINDOWS
                     Syscall.chmod(transferStream.Name, (FilePermissions)value);
-#else
-                    this.Log(LogLevel.Warning, "Setting file permissions in not supported in Windows.");
-#endif
                     state = State.Usual;
                     return;
                 }

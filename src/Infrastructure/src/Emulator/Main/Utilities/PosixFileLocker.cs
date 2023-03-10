@@ -1,4 +1,3 @@
-#if !PLATFORM_WINDOWS
 //
 // Copyright (c) 2010-2018 Antmicro
 // Copyright (c) 2011-2015 Realtime Embedded
@@ -69,4 +68,3 @@ namespace Antmicro.Renode.Utilities
         }
     }
 }
-#endif

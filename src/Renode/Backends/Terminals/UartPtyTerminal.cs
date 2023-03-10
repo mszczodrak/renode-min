@@ -6,7 +6,6 @@
 //
 using Antmicro.Renode.Core;
 using Antmicro.Renode.Exceptions;
-#if !PLATFORM_WINDOWS
 using System;
 using Antmicro.Renode.Peripherals.UART;
 using Antmicro.Renode.Utilities;
@@ -14,7 +13,6 @@ using AntShell.Terminal;
 using Antmicro.Migrant;
 using Mono.Unix;
 using System.IO;
-#endif
 
 namespace Antmicro.Renode.Backends.Terminals
 {
@@ -22,15 +20,10 @@ namespace Antmicro.Renode.Backends.Terminals
     {
         public static void CreateUartPtyTerminal(this Emulation emulation, string name, string fileName, bool forceCreate = false)
         {
-#if !PLATFORM_WINDOWS
             emulation.ExternalsManager.AddExternal(new UartPtyTerminal(fileName, forceCreate), name);
-#else
-            throw new RecoverableException("Creating UartPtyTerminal is not supported on Windows.");
-#endif
         }
     }
 
-#if !PLATFORM_WINDOWS
     public class UartPtyTerminal : BackendTerminal, IDisposable
     {
         public UartPtyTerminal(string linkName, bool forceCreate = false)
@@ -121,6 +114,5 @@ namespace Antmicro.Renode.Backends.Terminals
         [Transient]
         private IOProvider io;
     }
-#endif
 }
 

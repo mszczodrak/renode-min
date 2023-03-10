@@ -5,7 +5,6 @@
 // This file is licensed under the MIT License.
 // Full license text is available in 'licenses/MIT.txt'.
 //
-#if !PLATFORM_WINDOWS
 using System;
 using Mono.Unix.Native;
 using Mono.Unix;
@@ -227,11 +226,8 @@ namespace Antmicro.Renode.Utilities
         [DllImport("libc", EntryPoint = "tcsetattr")]
         private extern static void Tcsetattr(int fd, int attr, IntPtr termios);
 
-#if PLATFORM_LINUX
         [DllImport("libutil.so.1", EntryPoint = "openpty")]
-#else
-        [DllImport("util", EntryPoint = "openpty")]
-#endif
+
         private extern static int Openpty(IntPtr amaster, IntPtr aslave, IntPtr name, IntPtr termp, IntPtr winp);
 
         [Transient]
@@ -251,4 +247,4 @@ namespace Antmicro.Renode.Utilities
         private const int HangUpCheckPeriod = 500;
     }
 }
-#endif
+
