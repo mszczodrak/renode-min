@@ -102,14 +102,7 @@ namespace Antmicro.Renode.Logging.Backends
         private LuceneLoggerBackend()
         {
             indexDirectory = Path.Combine(TemporaryFilesManager.Instance.EmulatorTemporaryPath, "index");
-        #if NET && PLATFORM_OSX
-            // Locking/unlocking file regions is not supported on OSX platform
-            // https://github.com/dotnet/runtime/issues/16325#issuecomment-266498360
-            // Disable locking entirely on CoreCLR
-            var directory = FSDirectory.Open(new DirectoryInfo(indexDirectory), NoLockFactory.Instance);
-        #else
             var directory = FSDirectory.Open(indexDirectory);
-        #endif
 
             analyzer = new StandardAnalyzer(LuceneNet.Util.Version.LUCENE_30);
             writer = new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.LIMITED);

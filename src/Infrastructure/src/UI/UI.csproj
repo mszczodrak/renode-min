@@ -50,7 +50,6 @@
     <Compile Include="ConsoleWindowBackendAnalyzer.cs" />
     <Compile Include="IConsoleBackendAnalyzerProvider.cs" />
     <Compile Include="ConsoleBackendAnalyzers\PuttyProvider.cs" />
-    <Compile Include="ConsoleBackendAnalyzers\TerminalAppProvider.cs" />
     <Compile Include="ConsoleBackendAnalyzers\ProcessBasedProvider.cs" />
     <Compile Include="DummyIOSource.cs" />
     <Compile Include="ConsoleIOSource.cs" />

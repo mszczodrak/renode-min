@@ -21,13 +21,7 @@ namespace Antmicro.Renode.HostInterfaces.Network
             ITapInterface result;
 #if PLATFORM_WINDOWS
             result = new WindowsTapInterface(hostInterfaceName);
-#elif PLATFORM_OSX
-            if(persistent)
-            {
-                throw new RecoverableException("Persitent TAP is not available on OS X.");
-            }
-            result = new OsXTapInterface(hostInterfaceName);
-#elif PLATFORM_LINUX
+#else
             result = new LinuxTapInterface(hostInterfaceName, persistent);
 #endif
 

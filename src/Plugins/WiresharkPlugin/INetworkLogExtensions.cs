@@ -207,8 +207,6 @@ namespace Antmicro.Renode.Plugins.WiresharkPlugin
         private const string EthernetLogName = WiresharkExternalPrefix + "-" + "allEthernetTraffic";
 #if PLATFORM_WINDOWS
         private const string WiresharkPath = @"c:\Program Files\Wireshark\Wireshark.exe";
-#elif PLATFORM_OSX
-        private const string WiresharkPath = "/Applications/Wireshark.app/Contents/MacOS/Wireshark";
 #else
         private const string WiresharkPath = "/usr/bin/wireshark";
 #endif

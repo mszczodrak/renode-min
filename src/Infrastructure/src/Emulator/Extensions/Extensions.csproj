@@ -136,7 +136,6 @@
     <Compile Include="Hooks\WatchpointHookPythonEngine.cs" />
     <Compile Include="HostInterfaces\Network\WindowsTapInterface.cs" />
     <Compile Include="HostInterfaces\Network\LinuxTapInterface.cs" />
-    <Compile Include="HostInterfaces\Network\OsXTapInterface.cs" />
     <Compile Include="HostInterfaces\Network\ITapInterface.cs" />
     <Compile Include="Utilities\GDB\Commands\WriteDataToMemoryCommand.cs" />
     <Compile Include="Utilities\GDB\Commands\CalculateCRCCommand.cs" />
