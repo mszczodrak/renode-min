@@ -4,7 +4,6 @@
 // This file is licensed under the MIT License.
 // Full license text is available in 'licenses/MIT.txt'.
 //
-#if PLATFORM_LINUX
 using System.Diagnostics;
 
 namespace Antmicro.Renode.UI
@@ -39,4 +38,3 @@ namespace Antmicro.Renode.UI
     }
 }
 
-#endif

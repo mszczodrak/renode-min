@@ -18,9 +18,6 @@ namespace Antmicro.Renode
     {
         public static bool Start(string device, IEmulationElement loggingParent)
         {
-#if !PLATFORM_LINUX
-            throw new RecoverableException("Video capture is supported on Linux only!");
-#else
 
             // stop any previous capturer
             Stop();
@@ -45,28 +42,20 @@ namespace Antmicro.Renode
 
             started = true;
             return RequestBuffer();
-#endif
         }
 
         public static void Stop()
         {
-#if !PLATFORM_LINUX
-            throw new RecoverableException("Video capture is supported on Linux only!");
-#else
             if(started)
             {
                 started = false;
                 FreeBuffer();
                 LibCWrapper.Close(fd);
             }
-#endif
         }
 
         public static byte[] GrabSingleFrame()
         {
-#if !PLATFORM_LINUX
-            throw new RecoverableException("Video capture is supported on Linux only!");
-#else
             loggingParent.Log(LogLevel.Debug, "Grabbing a frame...");
 
             var framebuffer = Marshal.AllocHGlobal(FRAME_BUFFER_SIZE);
@@ -103,14 +92,10 @@ namespace Antmicro.Renode
             Marshal.FreeHGlobal(framebuffer);
 
             return frame;
-#endif
         }
 
         public static Tuple<int, int> SetImageSize(int width, int height)
         {
-#if !PLATFORM_LINUX
-            throw new RecoverableException("Video capture is supported on Linux only!");
-#else
             if(!FreeBuffer())
             {
                 return null;
@@ -147,7 +132,6 @@ namespace Antmicro.Renode
             }
 
             return Tuple.Create(finalWidth, finalHeight);
-#endif
         }
 
         private static bool CheckImageFormat()

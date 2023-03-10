@@ -6,10 +6,10 @@
 //
 using System;
 using System.Runtime.InteropServices;
-#if PLATFORM_LINUX
+
 using Mono.Unix.Native;
 using Mono.Unix;
-#endif
+
 
 namespace Antmicro.Renode.Utilities
 {
@@ -17,30 +17,19 @@ namespace Antmicro.Renode.Utilities
     {
         public static int Open(string path, int mode)
         {
-#if !PLATFORM_LINUX
-            throw new NotSupportedException("This API is available on Linux only!");
-#else
             var marshalledPath = Marshal.StringToHGlobalAnsi(path);
             var result = open(marshalledPath, mode);
             Marshal.FreeHGlobal(marshalledPath);
             return result;
-#endif
         }
 
         public static int Close(int fd)
         {
-#if !PLATFORM_LINUX
-            throw new NotSupportedException("This API is available on Linux only!");
-#else
             return close(fd);
-#endif
         }
 
         public static bool Write(int fd, IntPtr buffer, int count)
         {
-#if !PLATFORM_LINUX
-            throw new NotSupportedException("This API is available on Linux only!");
-#else
             var written = 0;
             while(written < count)
             {
@@ -54,14 +43,10 @@ namespace Antmicro.Renode.Utilities
             }
 
             return true;
-#endif
         }
 
         public static byte[] Read(int fd, int count)
         {
-#if !PLATFORM_LINUX
-            throw new NotSupportedException("This API is available on Linux only!");
-#else
             byte[] result = null;
             var buffer = Marshal.AllocHGlobal(count);
             var r = read(fd, buffer, count);
@@ -72,14 +57,10 @@ namespace Antmicro.Renode.Utilities
             }
             Marshal.FreeHGlobal(buffer);
             return result ?? new byte[0];
-#endif
         }
 
         public static byte[] Read(int fd, int count, int timeout, Func<bool> shouldCancel)
         {
-#if !PLATFORM_LINUX
-            throw new NotSupportedException("This API is available on Linux only!");
-#else
             int pollResult;
             var pollData = new Pollfd {
                 fd = fd,
@@ -100,43 +81,26 @@ namespace Antmicro.Renode.Utilities
             {
                 return null;
             }
-#endif
         }
 
         public static int Ioctl(int fd, int request, int arg)
         {
-#if !PLATFORM_LINUX
-            throw new NotSupportedException("This API is available on Linux only!");
-#else
             return ioctl(fd, request, arg);
-#endif
         }
 
         public static int Ioctl(int fd, int request, IntPtr arg)
         {
-#if !PLATFORM_LINUX
-            throw new NotSupportedException("This API is available on Linux only!");
-#else
             return ioctl(fd, request, arg);
-#endif
         }
 
         public static IntPtr Strcpy(IntPtr dst, IntPtr src)
         {
-#if !PLATFORM_LINUX
-            throw new NotSupportedException("This API is available on Linux only!");
-#else
             return strcpy(dst, src);
-#endif
         }
 
         public static string Strerror(int id)
         {
-#if !PLATFORM_LINUX
-            throw new NotSupportedException("This API is available on Linux only!");
-#else
             return Marshal.PtrToStringAuto(strerror(id));
-#endif
         }
 
         #region Externs

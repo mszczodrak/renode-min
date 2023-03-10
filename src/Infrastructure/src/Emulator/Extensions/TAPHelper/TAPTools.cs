@@ -5,7 +5,7 @@
 // This file is licensed under the MIT License.
 // Full license text is available in 'licenses/MIT.txt'.
 //
-#if PLATFORM_LINUX
+
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -86,4 +86,4 @@ namespace Antmicro.Renode.TAPHelper
         }
     }
 }
-#endif
+

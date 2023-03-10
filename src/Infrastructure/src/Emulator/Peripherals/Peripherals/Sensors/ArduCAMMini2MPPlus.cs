@@ -156,20 +156,16 @@ namespace Antmicro.Renode.Peripherals.Sensors
 
         public void AttachToExternalCamera(HostCamera camera)
         {
-#if PLATFORM_LINUX
+
             externalCamera = camera;
-#else
-            throw new RecoverableException("The external camera integration is currently available on Linux only!");
-#endif
+
         }
 
         public void DetachFromExternalCamera()
         {
-#if PLATFORM_LINUX
+
             externalCamera = null;
-#else
-            throw new RecoverableException("The external camera integration is currently available on Linux only!");
-#endif
+
         }
 
         private void DefineRegisters()
@@ -194,7 +190,7 @@ namespace Antmicro.Renode.Peripherals.Sensors
                     }
 
                     this.NoisyLog("Capturing frame");
-#if PLATFORM_LINUX
+
                     var ec = externalCamera;
                     if(ec != null)
                     {
@@ -202,9 +198,7 @@ namespace Antmicro.Renode.Peripherals.Sensors
                         imageData = ec.GrabFrame();
                     }
                     else if(preloadedImageData != null)
-#else
-                    if(preloadedImageData != null)
-#endif
+
                     { 
                         imageData = preloadedImageData;
                     }
@@ -269,9 +263,7 @@ namespace Antmicro.Renode.Peripherals.Sensors
 
         private readonly OV2640 sensor;
 
-#if PLATFORM_LINUX
         private HostCamera externalCamera;
-#endif
 
         private enum State
         {
