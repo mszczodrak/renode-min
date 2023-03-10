@@ -131,6 +131,7 @@ namespace Antmicro.Renode.UserInterface.Commands
         public MachCommand(Monitor monitor, Func<Machine> getCurrentMachine, Action<Machine> setCurrentMachine) 
             : base(monitor, "mach", "list and manipulate machines available in the environment.")
         {
+            Console.Out.WriteLine("Mach Command!");
             GetCurrentMachine = getCurrentMachine;
             SetCurrentMachine = setCurrentMachine;
         }

@@ -1057,10 +1057,7 @@ namespace Antmicro.Renode.Peripherals.CPU
             TlibDispose();
             RenodeFreeHostBlocks();
             binder.Dispose();
-            if(!EmulationManager.DisableEmulationFilesCleanup)
-            {
-                File.Delete(libraryFile);
-            }
+            File.Delete(libraryFile);
             if(dirtyAddressesPtr != IntPtr.Zero)
             {
                 memoryManager.Free(dirtyAddressesPtr);

@@ -78,12 +78,6 @@ def install_cli_arguments(parser):
                         default="mono" if platform.startswith("linux") or platform == "darwin" else "none",
                         help=".NET runner")
 
-    parser.add_argument("--debug-on-error",
-                        dest="debug_on_error",
-                        action="store_true",
-                        default=False,
-                        help="Enables the Renode User Interface when test fails")
-
     parser.add_argument("--cleanup-timeout",
                         dest="cleanup_timeout",
                         action="store",
@@ -303,10 +297,6 @@ class RobotTestSuite(object):
         args = [remote_server_binary, '--robot-server-port', str(options.remote_server_port + port_offset)]
         if not options.show_log:
             args.append('--hide-log')
-        if options.debug_on_error:
-            args.append('--robot-debug-on-error')
-        if options.keep_temps:
-            args.append('--keep-temporary-files')
         if options.renode_config:
             args.append('--config')
             args.append(options.renode_config)
@@ -431,8 +421,6 @@ class RobotTestSuite(object):
             variables.append('HOTSPOT_ACTION:' + hotspot)
         if options.debug_mode:
             variables.append('CONFIGURATION:Debug')
-        if options.debug_on_error:
-            variables.append('HOLD_ON_ERROR:True')
         if options.execution_metrics:
             variables.append('CREATE_EXECUTION_METRICS:True')
         if options.runner == 'dotnet':

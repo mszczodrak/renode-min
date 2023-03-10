@@ -17,7 +17,7 @@ namespace Antmicro.Renode.Utilities
     {
         static TemporaryFilesManager()
         {
-            Initialize(Path.GetTempPath(), DefaultDirectoryPrefix, !EmulationManager.DisableEmulationFilesCleanup);
+            Initialize(Path.GetTempPath(), DefaultDirectoryPrefix, true);
         }
 
         public static TemporaryFilesManager Instance { get; private set; }

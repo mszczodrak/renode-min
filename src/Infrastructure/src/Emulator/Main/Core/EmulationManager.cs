@@ -225,8 +225,6 @@ namespace Antmicro.Renode.Core
 
         public event Action EmulationChanged;
 
-        public static bool DisableEmulationFilesCleanup = false;
-
         private EmulationManager()
         {
             var serializerMode = ConfigurationManager.Instance.Get("general", "serialization-mode", Antmicro.Migrant.Customization.Method.Generated);
