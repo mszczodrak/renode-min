@@ -13,6 +13,49 @@ using Antmicro.Renode.Utilities;
 using Antmicro.Renode.RobotFramework;
 using Antmicro.Renode.Logging;
 
+
+
+namespace Antmicro.Renode
+{
+    public class Program
+    {
+        [STAThread]
+        public static void Main(string[] args)
+        {
+            Console.Out.WriteLine("Main!");
+            AppDomain.CurrentDomain.ProcessExit += (_, __) => Emulator.Exit();
+
+            var options = new Options();
+            var optionsParser = new OptionsParser.OptionsParser();
+            var optionsParsed = optionsParser.Parse(options, args);
+
+            Core.EmulationManager.RebuildInstance();
+
+            var thread = new Thread(() =>
+            {
+                try
+                {
+                    if(optionsParsed)
+                    {
+                        Antmicro.Renode.UI.CommandLineInterface.Run(options, (context) =>
+                        {
+                        });
+                    }
+                }
+                finally
+                {
+                    Emulator.FinishExecutionAsMainThread();
+                }
+            });
+            thread.Start();
+            Emulator.ExecuteAsMainThread();
+        }
+    }
+}
+
+
+
+/*
 namespace Antmicro.Renode
 {
     public class Program
@@ -28,12 +71,6 @@ namespace Antmicro.Renode
 
             ConfigureEnvironment(options);
 
-            /* 
-                We noticed that the static constructors' initialization chain breaks non-deterministically on some Mono versions crashing Renode with NullReferenceException.
-                In the current version, EmulationManager's static constructor calls TypeManager that in turn uses Logger; Logger however requires EmulationManager to be functional.
-                This circular dependency seems to be a problem.
-                Here we explicitly initialize EmulationManager as this seems to resolve the problem. This is just a workaround, until we refactor the code of the initialization phase.
-            */
             Core.EmulationManager.RebuildInstance();
 
             var thread = new Thread(() =>
@@ -91,3 +128,4 @@ namespace Antmicro.Renode
         }
     }
 }
+*/
