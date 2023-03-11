@@ -53,6 +53,7 @@ namespace Antmicro.Renode.PlatformDescription
             }
             var source = File.ReadAllText(path);
             usingsBeingProcessed.Push(Path.GetFullPath(path)); // don't need to pop since stack is cleared within ProcessInner
+            System.Console.Out.WriteLine("ProcessFile");
             ProcessInner(path, source);
         }
 
@@ -86,6 +87,7 @@ namespace Antmicro.Renode.PlatformDescription
 
                 while(objectValueInitQueue.Count > 0)
                 {
+                    System.Console.Out.WriteLine("objectValueInitQueue");
                     var objectValue = objectValueInitQueue.Dequeue();
                     initHandler.Execute(objectValue, objectValue.Attributes.OfType<InitAttribute>().Single().Lines,
                                         x => HandleInitableError(x, objectValue));
@@ -97,6 +99,7 @@ namespace Antmicro.Renode.PlatformDescription
                     {
                         continue;
                     }
+                    System.Console.Out.WriteLine("sortedEntries");
                     initHandler.Execute(entry, initAttribute.Lines, x => HandleInitableError(x, entry));
                 }
             }

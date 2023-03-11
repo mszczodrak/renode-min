@@ -99,20 +99,6 @@ namespace Antmicro.Renode
 
         private static string userDirectoryPath;
 
-        public static void ExecuteOnMainThread(Action what)
-        {
-            actionsOnMainThread.Add(what);
-        }
-
-        public static void ExecuteAsMainThread()
-        {
-            Action action;
-            while(actionsOnMainThread.TryTake(out action, -1))
-            {
-                action();
-            }
-        }
-
         public static void FinishExecutionAsMainThread()
         {
             actionsOnMainThread.CompleteAdding();

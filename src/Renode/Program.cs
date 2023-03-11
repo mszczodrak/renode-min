@@ -7,6 +7,7 @@ using Antmicro.Renode.Core;
 using Antmicro.Renode.UserInterface;
 using AntShell;
 using AntShell.Terminal;
+using System.Linq;
 
 namespace Antmicro.Renode
 {
@@ -15,36 +16,48 @@ namespace Antmicro.Renode
         [STAThread]
         public static void Main(string[] args)
         {
-            Console.Out.WriteLine("Main!");
             AppDomain.CurrentDomain.ProcessExit += (_, __) => Emulator.Exit();
-
             Core.EmulationManager.RebuildInstance();
-
-            var thread = new Thread(() =>
+            Emulator.BeforeExit += () =>
             {
-                try
-                {
-                    RunMe();
-                }
-                finally
-                {
-                    Emulator.FinishExecutionAsMainThread();
-                }
-            });
-            thread.Start();
-            Emulator.ExecuteAsMainThread();
+                Emulator.DisposeAll();
+            };
+            
+            RunShell();
+            //RunDirect();
         }
 
 
-        public static void RunMe()
+        public static void RunDirect() {
+            var monitor = new Antmicro.Renode.UserInterface.Monitor();
+            
+            // mach create "STM32F4_Discovery"
+            var machine = new Machine();
+            Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.AddMachine(machine, "STM32F4_Discovery");
+
+            // machine LoadPlatformDescription @platforms/boards/stm32f4_discovery-kit.repl
+            var usingResolver = new Antmicro.Renode.PlatformDescription.UserInterface.PlatformDescriptionMachineExtensions.UsingResolver(monitor.CurrentPathPrefixes);
+            var monitorInitHandler = new Antmicro.Renode.PlatformDescription.FakeInitHandler();
+            var driver = new Antmicro.Renode.PlatformDescription.CreationDriver(machine, usingResolver, monitorInitHandler);
+            driver.ProcessFile("/home/marcin/src/renode-min/platforms/boards/stm32f4_discovery-kit.repl");
+
+            var sysbus = machine.SystemBus;
+            var cpus = sysbus.GetCPUs();
+            Console.Out.WriteLine("Number of CPUs is {0}", cpus.Count());
+
+            // cpu PerformanceInMips 125
+            // see CpuKeyword.cs file
+            //var cpu = sysbus.GetCPUId(0)  as Antmicro.Renode.Peripherals.CPU.BaseCPU;
+            //cpu.PerformanceInMips = 125;
+
+            // 
+        }
+
+
+        public static void RunShell()
         {
             Console.Out.WriteLine("HELLO!");
-
-            Console.Out.WriteLine("Console!");
             Logger.AddBackend(ConsoleBackend.Instance, "console");
-
-            Logger.AddBackend(new MemoryBackend(), "memory");
-            Emulator.ShowAnalyzers = true;
 
             using(var context = ObjectCreator.Instance.OpenContext())
             {
@@ -76,15 +89,12 @@ namespace Antmicro.Renode
                     Name = "Shell thread"
                 }.Start();
 
-                Emulator.BeforeExit += () =>
-                {
-                    Emulator.DisposeAll();
-                };
-
                 Console.Out.WriteLine("Wait!");
                 Emulator.WaitForExit();
                 Console.Out.WriteLine("Exit!");
             }
         }
+
+        
     }
 }

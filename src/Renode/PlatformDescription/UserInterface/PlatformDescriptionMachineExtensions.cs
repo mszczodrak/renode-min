@@ -15,6 +15,7 @@ namespace Antmicro.Renode.PlatformDescription.UserInterface
     {
         public static void LoadPlatformDescription(this Machine machine, string platformDescriptionFile)
         {
+            System.Console.Out.WriteLine(platformDescriptionFile);
             PrepareDriver(machine).ProcessFile(platformDescriptionFile);
         }
 
