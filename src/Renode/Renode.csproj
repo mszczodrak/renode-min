@@ -136,10 +136,6 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\src\UI\UI.csproj">
-      <Project>{AEFE490F-85AC-42AF-9CAE-2B7FC7167E0E}</Project>
-      <Name>UI</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\src\Emulator\Main\Emulator.csproj">
       <Project>{2901AECB-A54F-4FD8-9AC1-033D86DC7257}</Project>
       <Name>Emulator</Name>
