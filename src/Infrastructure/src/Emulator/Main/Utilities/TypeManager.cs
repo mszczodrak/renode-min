@@ -805,7 +805,6 @@ namespace Antmicro.Renode.Utilities
             "nunit.engine.dll",
             "nunit.framework.dll",
             "NUnit3.TestAdapter.dll",
-            "OptionsParser.dll",
             "PacketDotNet.dll",
             "PangoSharp.dll",
             "protobuf-net.dll",

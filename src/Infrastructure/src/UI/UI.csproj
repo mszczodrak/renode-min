@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="CLIProgressMonitor.cs" />
     <Compile Include="CommandLineInterface.cs" />
-    <Compile Include="Options.cs" />
     <Compile Include="ConsoleWindowBackendAnalyzer.cs" />
     <Compile Include="IConsoleBackendAnalyzerProvider.cs" />
     <Compile Include="ConsoleBackendAnalyzers\PuttyProvider.cs" />
@@ -80,10 +79,6 @@
     <ProjectReference Include="..\..\..\..\lib\AntShell\AntShell\AntShell.csproj">
       <Project>{0A473566-F4C6-455E-A56E-B3963FBABDFF}</Project>
       <Name>AntShell</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\lib\options-parser\OptionsParser.csproj">
-      <Project>{C56AABEF-C01E-493F-A65F-09A572FE9B2E}</Project>
-      <Name>OptionsParser</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\lib\Migrant\Migrant\Migrant.csproj">
       <Project>{5F87C357-09FB-4F53-BE37-41FE5BD88957}</Project>

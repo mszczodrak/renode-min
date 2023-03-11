@@ -1,8 +1,0 @@
-log.log
-
-*.userprefs
-
-bin
-obj
-
-packages/

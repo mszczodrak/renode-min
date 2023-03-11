@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FdtSharp", "lib\FdtSharp\Fd
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emulator", "src\Infrastructure\src\Emulator\Main\Emulator.csproj", "{2901AECB-A54F-4FD8-9AC1-033D86DC7257}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionsParser", "lib\options-parser\OptionsParser.csproj", "{C56AABEF-C01E-493F-A65F-09A572FE9B2E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "src\Infrastructure\src\Emulator\Extensions\Extensions.csproj", "{4C636FAF-4650-4088-8EA8-2FCCC225E9CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "src\Infrastructure\src\UI\UI.csproj", "{AEFE490F-85AC-42AF-9CAE-2B7FC7167E0E}"
@@ -68,8 +66,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CxxDemangler", "lib\CxxDemangler\CxxDemangler\CxxDemangler.csproj", "{3A70B9B8-BBAB-47EA-8473-B7A0B4961D56}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tftp", "lib\InpliTftpServer\libtftp\libtftp_alt.csproj", "{1B320B7A-BAB5-4370-9ABE-3BDAD4392BDD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionsParserTests", "lib\options-parser\OptionsParserTests.csproj", "{69B08E08-10DC-473C-BCB7-3B0C398F63CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigGustave", "lib\BigGustave\src\BigGustave\BigGustave.csproj", "{959D076C-8127-4FEE-9737-0F8FDE5A0E09}"
 EndProject
