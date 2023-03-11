@@ -40,20 +40,6 @@ namespace Antmicro.Renode.UI
                 var monitor = new Antmicro.Renode.UserInterface.Monitor();
                 context.RegisterSurrogate(typeof(Antmicro.Renode.UserInterface.Monitor), monitor);
 
-                // we must initialize plugins AFTER registering monitor surrogate
-                // as some plugins might need it for construction
-                TypeManager.Instance.PluginManager.Init("CLI");
-
-                EmulationManager.Instance.ProgressMonitor.Handler = new CLIProgressMonitor();
-
-                var uartAnalyzerType = typeof(ConsoleWindowBackendAnalyzer);
-
-                EmulationManager.Instance.CurrentEmulation.BackendManager.SetPreferredAnalyzer(typeof(UARTBackend), uartAnalyzerType);
-                EmulationManager.Instance.EmulationChanged += () =>
-                {
-                    EmulationManager.Instance.CurrentEmulation.BackendManager.SetPreferredAnalyzer(typeof(UARTBackend), uartAnalyzerType);
-                };
-
                 Shell shell = null;
 
                 Console.Out.WriteLine("Shell on port!");

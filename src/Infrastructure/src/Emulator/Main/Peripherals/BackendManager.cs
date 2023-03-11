@@ -44,11 +44,6 @@ namespace Antmicro.Renode.Peripherals
             return analyzers[backend.GetType()].Where(x => x.Item2).Select(x => x.Item1.FullName);
         }
 
-        public void SetPreferredAnalyzer(Type backendType, Type analyzerType)
-        {
-            preferredAnalyzer[backendType] = analyzerType;
-        }
-
         public string GetPreferredAnalyzerFor(IAnalyzableBackend backend)
         {
             return preferredAnalyzer.ContainsKey(backend.GetType()) ? ((IAnalyzableBackendAnalyzer)Activator.CreateInstance(preferredAnalyzer[backend.GetType()])).GetType().FullName : null;

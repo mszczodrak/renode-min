@@ -33,5 +33,12 @@ namespace Antmicro.Renode
             thread.Start();
             Emulator.ExecuteAsMainThread();
         }
+
+
+
+
+
+
+        
     }
 }
