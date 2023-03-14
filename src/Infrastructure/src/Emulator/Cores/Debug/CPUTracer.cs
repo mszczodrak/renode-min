@@ -30,6 +30,8 @@ namespace Antmicro.Renode.Debug
     {
         public CPUTracer(Arm cpu)
         {
+            System.Console.Out.WriteLine("CPUTracer CPU!");
+
             this.cpu = cpu;
             this.bus = cpu.Bus;
         }

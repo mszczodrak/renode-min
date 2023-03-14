@@ -27,6 +27,7 @@ namespace Antmicro.Renode.Peripherals.CPU
     {
         public Arm(string cpuType, Machine machine, uint id = 0, Endianess endianness = Endianess.LittleEndian) : base(id, cpuType, machine, endianness)
         {
+            System.Console.Out.WriteLine("ARM CPU!");
         }
 
         public void Register(SemihostingUart peripheral, NullRegistrationPoint registrationPoint)

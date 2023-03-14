@@ -59,6 +59,8 @@ namespace Antmicro.Renode.Peripherals.CPU
         protected TranslationCPU(uint id, string cpuType, Machine machine, Endianess endianness, CpuBitness bitness = CpuBitness.Bits32)
             : base(id, cpuType, machine, endianness, bitness)
         {
+            System.Console.Out.WriteLine("Translation CPU!");
+
             this.translationCacheSize = DefaultTranslationCacheSize;
             translationCacheSync = new object();
             pauseGuard = new CpuThreadPauseGuard(this);

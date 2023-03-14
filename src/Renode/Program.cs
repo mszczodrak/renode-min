@@ -23,8 +23,8 @@ namespace Antmicro.Renode
                 Emulator.DisposeAll();
             };
             
-            RunShell();
-            //RunDirect();
+            //RunShell();
+            RunDirect();
         }
 
 
@@ -41,16 +41,22 @@ namespace Antmicro.Renode
             var driver = new Antmicro.Renode.PlatformDescription.CreationDriver(machine, usingResolver, monitorInitHandler);
             driver.ProcessFile("/home/marcin/src/renode-min/platforms/boards/stm32f4_discovery-kit.repl");
 
-            var sysbus = machine.SystemBus;
-            var cpus = sysbus.GetCPUs();
-            Console.Out.WriteLine("Number of CPUs is {0}", cpus.Count());
+            //var sysbus = machine.SystemBus;
+            //var cpus = sysbus.GetCPUs();
+            //Console.Out.WriteLine("Number of CPUs is {0}", cpus.Count());
 
             // cpu PerformanceInMips 125
-            // see CpuKeyword.cs file
-            //var cpu = sysbus.GetCPUId(0)  as Antmicro.Renode.Peripherals.CPU.BaseCPU;
-            //cpu.PerformanceInMips = 125;
+            foreach(var cpu in machine.SystemBus.GetCPUs().OfType<Antmicro.Renode.Peripherals.CPU.BaseCPU>())
+            {
+                cpu.PerformanceInMips = 125;
+            }
 
-            // 
+            // emulation CreateServerSocketTerminal 3456 "term"
+
+
+            // connector Connect sysbus.uart4 term
+
+            // sysbus LoadELF @https://dl.antmicro.com/projects/renode/stm32f4discovery.elf-s_445441-827a0dedd3790f4559d7518320006613768b5e72
         }
 
 

@@ -30,6 +30,8 @@ namespace Antmicro.Renode.Peripherals.CPU
                 throw new RecoverableException(new ArgumentNullException("nvic"));
             }
 
+            System.Console.Out.WriteLine("CortexM CPU!");
+
             this.nvic = nvic;
             nvic.AttachCPU(this);
         }
