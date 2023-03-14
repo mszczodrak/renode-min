@@ -24,6 +24,7 @@ namespace Antmicro.Renode.Core
     {
         public Emulation()
         {
+            System.Console.Out.WriteLine("Emulation! (has ExternalManager, Connector, etc...)");
             MasterTimeSource = new MasterTimeSource();
             HostMachine = new HostMachine();
             MACRepository = new MACRepository();

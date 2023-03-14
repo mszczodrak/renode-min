@@ -18,6 +18,7 @@ namespace Antmicro.Renode.Backends.Terminals
     {
         public BackendTerminal()
         {
+            System.Console.Out.WriteLine("BackendTerminal!");
             buffer = new Queue();
         }
 

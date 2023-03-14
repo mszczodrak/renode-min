@@ -23,6 +23,7 @@ namespace Antmicro.Renode.Tools.Network
     {
         public static void CreateSwitch(this Emulation emulation, string name)
         {
+            System.Console.Out.WriteLine("CreateSwitch!");
             emulation.ExternalsManager.AddExternal(new Switch(), name);
         }
     }

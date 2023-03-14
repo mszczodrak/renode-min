@@ -17,6 +17,7 @@ namespace Antmicro.Renode.Backends.Terminals
     {
         public static void CreateServerSocketTerminal(this Emulation emulation, int port, string name, bool emitConfig = true, bool flushOnConnect = false)
         {
+            System.Console.Out.WriteLine("CreateServerSocketTerminal! {0} {1} {2} {3}", port, emitConfig, flushOnConnect, name);
             emulation.ExternalsManager.AddExternal(new ServerSocketTerminal(port, emitConfig, flushOnConnect), name);
         }
     }

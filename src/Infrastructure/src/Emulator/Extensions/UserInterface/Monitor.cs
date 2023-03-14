@@ -203,6 +203,8 @@ namespace Antmicro.Renode.UserInterface
 
         private void InitCommands()
         {
+            System.Console.Out.WriteLine("InitCommands in Monitor!");
+
             Bind(Machine.MachineKeyword, () => Machine);
             BindStatic("connector", () => emulationManager.CurrentEmulation.Connector);
             BindStatic("emulation", () => Emulation);

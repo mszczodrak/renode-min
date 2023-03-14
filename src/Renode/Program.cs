@@ -41,7 +41,7 @@ namespace Antmicro.Renode
             var driver = new Antmicro.Renode.PlatformDescription.CreationDriver(machine, usingResolver, monitorInitHandler);
             driver.ProcessFile("/home/marcin/src/renode-min/platforms/boards/stm32f4_discovery-kit.repl");
 
-            //var sysbus = machine.SystemBus;
+            var sysbus = machine.SystemBus;
             //var cpus = sysbus.GetCPUs();
             //Console.Out.WriteLine("Number of CPUs is {0}", cpus.Count());
 
@@ -52,7 +52,10 @@ namespace Antmicro.Renode
             }
 
             // emulation CreateServerSocketTerminal 3456 "term"
+            Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.ExternalsManager.AddExternal(new Antmicro.Renode.Backends.Terminals.ServerSocketTerminal(3456, true, false), "term");
 
+            // connector Connect sysbus.uart4 term
+            //Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.Connector.Connect(sysbus.UART.);
 
             // connector Connect sysbus.uart4 term
 
