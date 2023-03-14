@@ -167,14 +167,6 @@
       <Project>{66400796-0C5B-4386-A859-50A2AC3F3DB7}</Project>
       <Name>Peripherals</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\src\Plugins\SampleCommandPlugin\SampleCommandPlugin.csproj">
-      <Project>{66A5675A-13AE-4454-88A6-29EB2D6F5988}</Project>
-      <Name>SampleCommandPlugin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\src\Plugins\TracePlugin\TracePlugin.csproj">
-      <Project>{887C6088-F483-466A-A671-06EEC42B8DC1}</Project>
-      <Name>TracePlugin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Plugins\WiresharkPlugin\WiresharkPlugin.csproj">
       <Project>{66A9995A-13AE-4454-88A6-29EB2D6F5988}</Project>
       <Name>WiresharkPlugin</Name>
