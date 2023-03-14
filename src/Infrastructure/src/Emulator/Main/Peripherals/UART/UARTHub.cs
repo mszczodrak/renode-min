@@ -19,6 +19,7 @@ namespace Antmicro.Renode.Peripherals.UART
     {
         public static void CreateUARTHub(this Emulation emulation, string name)
         {
+            System.Console.Out.WriteLine("CreateUARTHub {0}!", name);
             emulation.ExternalsManager.AddExternal(new UARTHub(), name);
         }
     }
@@ -27,6 +28,7 @@ namespace Antmicro.Renode.Peripherals.UART
     {
         public UARTHub()
         {
+            System.Console.Out.WriteLine("UARTHub!");
             uarts = new Dictionary<IUART, Action<byte>>();
             locker = new object();
         }

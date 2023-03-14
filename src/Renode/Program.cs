@@ -51,13 +51,32 @@ namespace Antmicro.Renode
                 cpu.PerformanceInMips = 125;
             }
 
+            System.Console.WriteLine("ServerSocketTerminal");
             // emulation CreateServerSocketTerminal 3456 "term"
-            Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.ExternalsManager.AddExternal(new Antmicro.Renode.Backends.Terminals.ServerSocketTerminal(3456, true, false), "term");
+            var term = new Antmicro.Renode.Backends.Terminals.ServerSocketTerminal(3456, true, false);
+            Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.ExternalsManager.AddExternal(term, "term");
+            System.Console.WriteLine("ServerSocketTerminal Added");
 
             // connector Connect sysbus.uart4 term
-            //Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.Connector.Connect(sysbus.UART.);
+            IEmulationElement uartEmulationElement = null;
+            EmulationManager.Instance.CurrentEmulation.TryGetEmulationElementByName("uart4", machine, out uartEmulationElement);
+            Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.Connector.Connect(uartEmulationElement, term);
 
-            // connector Connect sysbus.uart4 term
+            //IEmulationElement termEmulationElement = null;
+            //EmulationManager.Instance.CurrentEmulation.TryGetEmulationElementByName("term", machine, out termEmulationElement);
+
+            //System.Console.WriteLine("Print Names");
+            //var names = Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.ExternalsManager.GetNames();
+            //foreach(var name in names)
+            //{
+            //    System.Console.WriteLine(name);
+            //}
+            //System.Console.WriteLine("Print Names Done");
+            //Antmicro.Renode.Backends.Terminals.ServerSocketTerminal external;
+            //if(EmulationManager.Instance.CurrentEmulation.ExternalsManager.TryGetByName("term", out external))
+            //{
+            //}
+
 
             // sysbus LoadELF @https://dl.antmicro.com/projects/renode/stm32f4discovery.elf-s_445441-827a0dedd3790f4559d7518320006613768b5e72
         }

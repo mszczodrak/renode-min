@@ -29,6 +29,7 @@ namespace Antmicro.Renode.Extensions.Utilities
                 throw new RecoverableException($"The {path} is alredy used as UART file backend. Please close it using 'CloseFileBackend' before re-using");
             }
 
+            System.Console.Out.WriteLine("AddExternal UartFileBackend! {0}", name);
             emulation.ExternalsManager.AddExternal(new UartFileBackend(path, uart, immediateFlush), name);
         }
 

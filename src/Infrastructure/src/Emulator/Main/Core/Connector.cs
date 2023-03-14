@@ -23,6 +23,8 @@ namespace Antmicro.Renode.Core
 
         public void Connect(IEmulationElement connectee, IConnectable connector)
         {
+            System.Console.Out.WriteLine("Connector.Connect!");
+
             try
             {
                 ((dynamic)connector).AttachTo((dynamic)connectee);

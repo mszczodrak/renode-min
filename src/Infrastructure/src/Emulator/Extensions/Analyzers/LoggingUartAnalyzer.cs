@@ -29,6 +29,7 @@ namespace Antmicro.Renode.Analyzers
     {
         public LoggingUartAnalyzer()
         {
+            System.Console.Out.WriteLine("LoggingUartAnalyzer!");
             line = new StringBuilder(InitialCapacity);
             LogLevel = LogLevel.Info;
 

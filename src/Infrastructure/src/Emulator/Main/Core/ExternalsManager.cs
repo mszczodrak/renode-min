@@ -29,6 +29,8 @@ namespace Antmicro.Renode.Core
 
         public void AddExternal(IExternal external, string name)
         {
+            System.Console.Out.WriteLine("ExternalsManager:AddExternal! {0}", name);
+
             lock(externals)
             {
                 if(externals.ContainsValue(external))

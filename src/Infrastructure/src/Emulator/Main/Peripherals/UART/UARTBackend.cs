@@ -29,6 +29,7 @@ namespace Antmicro.Renode.Peripherals.UART
 
         public void Attach(IUART uart)
         {
+            System.Console.Out.WriteLine("UARTBackend Attach!");
             UART = uart;
             UART.CharReceived += b =>
             {
