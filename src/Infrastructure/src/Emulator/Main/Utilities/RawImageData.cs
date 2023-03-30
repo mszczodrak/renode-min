@@ -6,7 +6,6 @@
 //
 
 using System.IO;
-using BigGustave;
 using Antmicro.Renode.Backends.Display;
 using Antmicro.Renode.Exceptions;
 
@@ -27,7 +26,9 @@ namespace Antmicro.Renode.Utilities
 
         public Stream ToPng()
         {
+            // MARCIN
             var stream = new MemoryStream();
+            /*
             var builder = PngBuilder.Create(Width, Height, false);
             for(int y = 0; y < Height; ++y)
             {
@@ -39,6 +40,7 @@ namespace Antmicro.Renode.Utilities
             }
             builder.Save(stream);
             stream.Seek(0, SeekOrigin.Begin);
+            */
             return stream;
         }
 
