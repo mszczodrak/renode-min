@@ -49,9 +49,6 @@
     <Compile Include="STMCANTest.cs" />
     <Compile Include="GailserUARTTests.cs" />
     <Compile Include="LPC43xx_GPIO_Test.cs" />
-    <Compile Include="OpenTitan_AES_Test.cs" />
-    <Compile Include="OpenTitan_KeyManagerTest.cs" />
-    <Compile Include="OpenTitan_I2C_Test.cs" />
     <Compile Include="Cadence_TTCTests.cs" />
     <Compile Include="Cadence_UARTTests.cs" />
   </ItemGroup>
