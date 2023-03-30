@@ -43,8 +43,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeripheralsTests", "src\Inf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiresharkPlugin", "src\Plugins\WiresharkPlugin\WiresharkPlugin.csproj", "{66A9995A-13AE-4454-88A6-29EB2D6F5988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenodeTests", "tests\unit-tests\RenodeTests\RenodeTests.csproj", "{779FB07B-87EB-472D-ABC4-ACBED1A5D9FC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{8BD709BF-8C11-4CBA-9A7D-CC2CC639BD4F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CD9D4CF9-BD98-4D57-A5EF-EA5C3C75CB0C}"
@@ -58,8 +56,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cores-riscv64", "src\Infrastructure\src\Emulator\Cores\cores-riscv64.csproj", "{BB222124-707C-5EFD-8289-2728351FB7AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CxxDemangler", "lib\CxxDemangler\CxxDemangler\CxxDemangler.csproj", "{3A70B9B8-BBAB-47EA-8473-B7A0B4961D56}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tftp", "lib\InpliTftpServer\libtftp\libtftp_alt.csproj", "{1B320B7A-BAB5-4370-9ABE-3BDAD4392BDD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigGustave", "lib\BigGustave\src\BigGustave\BigGustave.csproj", "{959D076C-8127-4FEE-9737-0F8FDE5A0E09}"
 EndProject

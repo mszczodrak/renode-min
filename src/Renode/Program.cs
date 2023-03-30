@@ -23,7 +23,6 @@ namespace Antmicro.Renode
                 Emulator.DisposeAll();
             };
             
-            //RunShell();
             RunDirect();
         }
 
@@ -79,50 +78,6 @@ namespace Antmicro.Renode
 
 
             // sysbus LoadELF @https://dl.antmicro.com/projects/renode/stm32f4discovery.elf-s_445441-827a0dedd3790f4559d7518320006613768b5e72
-        }
-
-
-        public static void RunShell()
-        {
-            Console.Out.WriteLine("HELLO!");
-            Logger.AddBackend(ConsoleBackend.Instance, "console");
-
-            using(var context = ObjectCreator.Instance.OpenContext())
-            {
-                var monitor = new Antmicro.Renode.UserInterface.Monitor();
-                context.RegisterSurrogate(typeof(Antmicro.Renode.UserInterface.Monitor), monitor);
-
-                Shell shell = null;
-
-                Console.Out.WriteLine("Shell on port!");
-                var io = new IOProvider()
-                {
-                    Backend = new SocketIOSource(1234)
-                };
-                shell = ShellProvider.GenerateShell(monitor, true);
-                shell.Terminal = new NavigableTerminalEmulator(io, true);
-
-                Logger.Log(LogLevel.Info, "Monitor available in telnet mode on port {0}", 1234);
-                
-                shell.Quitted += Emulator.Exit;
-
-                monitor.Interaction = shell.Writer;
-                monitor.MachineChanged += emu => shell.SetPrompt(emu != null ? new Prompt(string.Format("({0}) ", emu), ConsoleColor.DarkYellow) : null);
-
-                shell.Terminal.PlainMode = false;
-
-                new System.Threading.Thread(x => shell.Start(true))
-                {
-                    IsBackground = true,
-                    Name = "Shell thread"
-                }.Start();
-
-                Console.Out.WriteLine("Wait!");
-                Emulator.WaitForExit();
-                Console.Out.WriteLine("Exit!");
-            }
-        }
-
-        
+        }        
     }
 }

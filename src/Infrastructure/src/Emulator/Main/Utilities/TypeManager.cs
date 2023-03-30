@@ -785,7 +785,6 @@ namespace Antmicro.Renode.Utilities
             "IronPython.SQLite.dll",
             "IronPython.StdLib.dll",
             "IronPython.Wpf.dll",
-            "libtftp.dll",
             "Lucene.Net.dll",
             "LZ4.dll",
             "mcs.dll",
