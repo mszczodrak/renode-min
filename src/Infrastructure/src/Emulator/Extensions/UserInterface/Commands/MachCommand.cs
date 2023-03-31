@@ -128,7 +128,7 @@ namespace Antmicro.Renode.UserInterface.Commands
         }
 
         private readonly Func<Machine> GetCurrentMachine;
-        private readonly Action<Machine> SetCurrentMachine;
+        public readonly Action<Machine> SetCurrentMachine;
 
         public MachCommand(Monitor monitor, Func<Machine> getCurrentMachine, Action<Machine> setCurrentMachine) 
             : base(monitor, "mach", "list and manipulate machines available in the environment.")

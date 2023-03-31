@@ -1,13 +1,8 @@
 using System.Threading;
 using System;
-using Antmicro.Renode.Utilities;
 using Antmicro.Renode.Logging;
-using Antmicro.Renode.Logging.Backends;
-using Antmicro.Renode.Core;
-using Antmicro.Renode.UserInterface;
 using AntShell;
 using AntShell.Terminal;
-using System.Linq;
 
 namespace Antmicro.Renode
 {
@@ -23,31 +18,38 @@ namespace Antmicro.Renode
                 Emulator.DisposeAll();
             };
             
-            RunShell();
-            //RunDirect();
+            // RunShell();
+            RunDirect();
         }
 
 
         public static void RunDirect() {
 
-            var monitor = new Antmicro.Renode.UserInterface.Monitor();
-            var context = ObjectCreator.Instance.OpenContext();
-            context.RegisterSurrogate(typeof(Antmicro.Renode.UserInterface.Monitor), monitor);
+            System.Console.Out.WriteLine("STUDIO [Program] Hello Direct");
+            Logger.AddBackend(ConsoleBackend.Instance, "console");
+
+            var monitor = new UserInterface.Monitor();
+            var context = Core.ObjectCreator.Instance.OpenContext();
+            context.RegisterSurrogate(typeof(UserInterface.Monitor), monitor);
 
 
             // mach create "STM32F4_Discovery"
-            var machine = new Core.Machine();
-            Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.AddMachine(machine, "STM32F4_flat");
+            Core.Machine machine;
+            machine = new Core.Machine();
+            Core.EmulationManager.Instance.CurrentEmulation.AddMachine(machine, "STM32F4_flat");
+
+
+
 
             // machine LoadPlatformDescription @platforms/boards/stm32f4_discovery-kit.repl
-            var usingResolver = new Antmicro.Renode.PlatformDescription.UserInterface.PlatformDescriptionMachineExtensions.UsingResolver(monitor.CurrentPathPrefixes);
-            var monitorInitHandler = new Antmicro.Renode.PlatformDescription.UserInterface.MonitorInitHandler(machine, monitor);
-            var driver = new Antmicro.Renode.PlatformDescription.CreationDriver(machine, usingResolver, monitorInitHandler);
-            driver.ProcessFile("/home/marcin/src/renode-min/platforms/boards/stm32f4_flat.repl");
+            //var usingResolver = new Antmicro.Renode.PlatformDescription.UserInterface.PlatformDescriptionMachineExtensions.UsingResolver(monitor.CurrentPathPrefixes);
+            //var monitorInitHandler = new Antmicro.Renode.PlatformDescription.UserInterface.MonitorInitHandler(machine, monitor);
+            //var driver = new Antmicro.Renode.PlatformDescription.CreationDriver(machine, usingResolver, monitorInitHandler);
+            //driver.ProcessFile("/home/marcin/src/renode-min/platforms/boards/stm32f4_flat.repl");
 
-            var sysbus = machine.SystemBus;
-            var cpus = sysbus.GetCPUs();
-            System.Console.Out.WriteLine("STUDIO [Program] Number of CPUs is {0}", cpus.Count());
+            //var sysbus = machine.SystemBus;
+            //var cpus = sysbus.GetCPUs();
+            //System.Console.Out.WriteLine("STUDIO [Program] Number of CPUs is {0}", cpus.Count());
 
             // cpu PerformanceInMips 125
             // see CpuKeyword.cs file
@@ -61,7 +63,7 @@ namespace Antmicro.Renode
             System.Console.Out.WriteLine("STUDIO [Program] Hello Shell");
             Logger.AddBackend(ConsoleBackend.Instance, "console");
 
-            using(var context = ObjectCreator.Instance.OpenContext())
+            using(var context = Core.ObjectCreator.Instance.OpenContext())
             {
                 var monitor = new Antmicro.Renode.UserInterface.Monitor();
                 context.RegisterSurrogate(typeof(Antmicro.Renode.UserInterface.Monitor), monitor);
@@ -71,9 +73,9 @@ namespace Antmicro.Renode
                 System.Console.Out.WriteLine("STUDIO [Program] Shell on port");
                 var io = new IOProvider()
                 {
-                    Backend = new SocketIOSource(1234)
+                    Backend = new Utilities.SocketIOSource(1234)
                 };
-                shell = ShellProvider.GenerateShell(monitor, true);
+                shell = UserInterface.ShellProvider.GenerateShell(monitor, true);
                 shell.Terminal = new NavigableTerminalEmulator(io, true);
 
                 Logger.Log(LogLevel.Info, "Monitor available in telnet mode on port {0}", 1234);

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Antmicro.Renode.Core;
 using Antmicro.Renode.Core.Structure;
 using Antmicro.Renode.Logging;
-using Antmicro.Migrant;
+// using Antmicro.Migrant;
 
 namespace Antmicro.Renode.Peripherals.UART
 {
@@ -58,7 +58,7 @@ namespace Antmicro.Renode.Peripherals.UART
             uart.CharReceived -= this.WriteChar;
         }
 
-        [field: Transient]
+        [field: Migrant.Transient]
         public event Action<byte> CharReceived;
 
         protected abstract void CharWritten();
