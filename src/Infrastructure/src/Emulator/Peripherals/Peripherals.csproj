@@ -49,9 +49,6 @@
   <ItemGroup>
     <Compile Include="Peripherals\Timers\EFR32_RTCC.cs" />
     <Compile Include="Peripherals\Timers\EFR32_Timer.cs" />
-    <Compile Include="Peripherals\Timers\LiteX_CPUTimer.cs" />
-    <Compile Include="Peripherals\Timers\LiteX_Timer.cs" />
-    <Compile Include="Peripherals\Timers\LiteX_Timer_64bit.cs" />
     <Compile Include="Peripherals\USB\MPFS_USB.cs" />
     <Compile Include="Peripherals\USB\USBPendrive.cs" />
     <Compile Include="Peripherals\Timers\MPFS_RTC.cs" />
@@ -192,8 +189,6 @@
     <Compile Include="Peripherals\GPIOPort\XilinxGPIOPS.cs" />
     <Compile Include="Peripherals\USBDeprecated\USBTablet.cs" />
     <Compile Include="Peripherals\GPIOPort\Emios.cs" />
-    <Compile Include="Peripherals\IRQControllers\MPC5567_INTC.cs" />
-    <Compile Include="Peripherals\UART\MPC5567_UART.cs" />
     <Compile Include="Peripherals\Timers\CC2538SleepTimer.cs" />
     <Compile Include="Peripherals\USBDeprecated\Ulpi.cs" />
     <Compile Include="Peripherals\SD\SunxiMMC.cs" />
@@ -275,9 +270,6 @@
     <Compile Include="Peripherals\GPIOPort\MiV_CoreGPIO.cs" />
     <Compile Include="Peripherals\Timers\MiV_CoreTimer.cs" />
     <Compile Include="Peripherals\UART\MiV_CoreUART.cs" />
-    <Compile Include="Peripherals\UART\LiteX_UART.cs" />
-    <Compile Include="Peripherals\UART\LiteX_UART_64bit.cs" />
-    <Compile Include="Peripherals\Network\LiteX_Ethernet.cs" />
     <Compile Include="Peripherals\UART\PicoSoC_SimpleUART.cs" />
     <Compile Include="Peripherals\Sensors\DummySensor.cs" />
     <Compile Include="Peripherals\UART\SiFive_UART.cs" />
@@ -306,24 +298,15 @@
     <Compile Include="Peripherals\UART\LowPower_UART.cs" />
     <Compile Include="Peripherals\Timers\LowPower_Timer.cs" />
     <Compile Include="Peripherals\EtherBoneBridge.cs" />
-    <Compile Include="Peripherals\SPI\LiteX_SPI_Flash.cs" />
-    <Compile Include="Peripherals\GPIOPort\LiteX_ControlAndStatus.cs" />
-    <Compile Include="Peripherals\GPIOPort\LiteX_GPIO.cs" />
-    <Compile Include="Peripherals\SPI\LiteX_SPI.cs" />
     <Compile Include="Peripherals\SD\SDHelpers.cs" />
     <Compile Include="Peripherals\MTD\EFR32xg13FlashController.cs" />
     <Compile Include="Peripherals\USB\ValentyUSB.cs" />
-    <Compile Include="Peripherals\I2C\LiteX_I2C.cs" />
-    <Compile Include="Peripherals\I2C\LiteX_I2C_Zephyr.cs" />
     <Compile Include="Peripherals\SPI\PicoRV_SPI.cs" />
     <Compile Include="Peripherals\USB\USBKeyboard.cs" />
     <Compile Include="Peripherals\Wireless\IEEE802_15_4\PHYHeader802154.cs" />
     <Compile Include="Peripherals\SPI\MAX3421E.cs" />
     <Compile Include="Peripherals\GPIOPort\CC2538_GPIO.cs" />
-    <Compile Include="Peripherals\Miscellaneous\LiteX_SoC_Controller.cs" />
-    <Compile Include="Peripherals\Miscellaneous\LiteX_SoC_Controller_CSR32.cs" />
     <Compile Include="Peripherals\SPI\DesignWare_SPI.cs" />
-    <Compile Include="Peripherals\Miscellaneous\LiteX_MMCM.cs" />
     <Compile Include="Peripherals\Analog\EOSS3_ADC.cs" />
     <Compile Include="Peripherals\Analog\STM32F0_ADC.cs" />
     <Compile Include="Peripherals\Analog\Xilinx_XADC.cs" />
@@ -336,9 +319,6 @@
     <Compile Include="Peripherals\SD\LiteSDCard.cs" />
     <Compile Include="Peripherals\SD\LiteSDCard_CSR32.cs" />
     <Compile Include="Peripherals\Sensors\PAC1934.cs" />
-    <Compile Include="Peripherals\Sound\LiteX_I2S.cs" />
-    <Compile Include="Peripherals\Sound\LiteX_I2S_Master.cs" />
-    <Compile Include="Peripherals\Sound\LiteX_I2S_Slave.cs" />
     <Compile Include="Peripherals\Sound\NRF52840_I2S.cs" />
     <Compile Include="Peripherals\Sound\NRF52840_PDM.cs" />
     <Compile Include="Peripherals\UART\K6xF_UART.cs" />
@@ -386,8 +366,6 @@
     <Compile Include="Peripherals\Sensors\PULP_uDMA_Camera.cs" />
     <Compile Include="Peripherals\Sensors\HM01B0.cs" />
     <Compile Include="Peripherals\Sound\EOSS3_Voice.cs" />
-    <Compile Include="Peripherals\Network\LiteX_Ethernet_CSR32.cs" />
-    <Compile Include="Peripherals\Timers\LiteX_Timer_CSR32.cs" />
     <Compile Include="Peripherals\Timers\STM32_IndependentWatchdog.cs" />
     <Compile Include="Peripherals\GPIOPort\IMXRT_GPIO.cs" />
     <Compile Include="Peripherals\SPI\IMXRT_FlexSPI.cs" />
@@ -426,7 +404,6 @@
     <Compile Include="Peripherals\Miscellaneous\ExternalWindowMMU.cs" />
     <Compile Include="Peripherals\Mocks\SimpleDMA.cs" />
     <Compile Include="Peripherals\UART\SAMD5_UART.cs" />
-    <Compile Include="Peripherals\Miscellaneous\LiteX_MMCM_CSR32.cs" />
     <Compile Include="Peripherals\UART\SAMD20_UART.cs" />
     <Compile Include="Peripherals\UART\USBSerialPort_S3B.cs" />
     <Compile Include="Peripherals\Miscellaneous\MAX32650_GCR.cs" />
