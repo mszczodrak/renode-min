@@ -117,7 +117,6 @@
     <Compile Include="PlatformDescription\Syntax\IrqAttribute.cs" />
     <Compile Include="Network\NetworkServer\NetworkServer.cs" />
     <Compile Include="Network\NetworkServer\IServerModule.cs" />
-    <Compile Include="Network\NetworkServer\Modules\TftpServerModule.cs" />
     <Compile Include="Integrations\ArduinoLoader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -168,25 +167,13 @@
       <Project>{66400796-0C5B-4386-A859-50A2AC3F3DB7}</Project>
       <Name>Peripherals</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\src\Plugins\SampleCommandPlugin\SampleCommandPlugin.csproj">
-      <Project>{66A5675A-13AE-4454-88A6-29EB2D6F5988}</Project>
-      <Name>SampleCommandPlugin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\src\Plugins\TracePlugin\TracePlugin.csproj">
       <Project>{887C6088-F483-466A-A671-06EEC42B8DC1}</Project>
       <Name>TracePlugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plugins\WiresharkPlugin\WiresharkPlugin.csproj">
-      <Project>{66A9995A-13AE-4454-88A6-29EB2D6F5988}</Project>
-      <Name>WiresharkPlugin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-riscv64.csproj">
       <Project>{BB222124-707C-5EFD-8289-2728351FB7AA}</Project>
       <Name>cores-riscv64</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\lib\InpliTftpServer\libtftp\libtftp_alt.csproj">
-      <Project>{1B320B7A-BAB5-4370-9ABE-3BDAD4392BDD}</Project>
-      <Name>libtftp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\lib\Packet.Net\PacketDotNet\PacketDotNet.csproj">
       <Project>{55ABBA4C-AAF9-4726-A592-0C92436CEC92}</Project>
