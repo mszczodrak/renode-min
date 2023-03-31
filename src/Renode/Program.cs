@@ -29,17 +29,21 @@ namespace Antmicro.Renode
 
 
         public static void RunDirect() {
+
             var monitor = new Antmicro.Renode.UserInterface.Monitor();
-            
+            var context = ObjectCreator.Instance.OpenContext();
+            context.RegisterSurrogate(typeof(Antmicro.Renode.UserInterface.Monitor), monitor);
+
+
             // mach create "STM32F4_Discovery"
-            var machine = new Machine();
-            Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.AddMachine(machine, "STM32F4_Discovery");
+            var machine = new Core.Machine();
+            Antmicro.Renode.Core.EmulationManager.Instance.CurrentEmulation.AddMachine(machine, "STM32F4_flat");
 
             // machine LoadPlatformDescription @platforms/boards/stm32f4_discovery-kit.repl
             var usingResolver = new Antmicro.Renode.PlatformDescription.UserInterface.PlatformDescriptionMachineExtensions.UsingResolver(monitor.CurrentPathPrefixes);
-            var monitorInitHandler = new Antmicro.Renode.PlatformDescription.FakeInitHandler();
+            var monitorInitHandler = new Antmicro.Renode.PlatformDescription.UserInterface.MonitorInitHandler(machine, monitor);
             var driver = new Antmicro.Renode.PlatformDescription.CreationDriver(machine, usingResolver, monitorInitHandler);
-            driver.ProcessFile("/home/marcin/src/renode-min/platforms/boards/stm32f4_discovery-kit.repl");
+            driver.ProcessFile("/home/marcin/src/renode-min/platforms/boards/stm32f4_flat.repl");
 
             var sysbus = machine.SystemBus;
             var cpus = sysbus.GetCPUs();

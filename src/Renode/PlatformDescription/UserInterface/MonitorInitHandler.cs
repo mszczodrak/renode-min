@@ -18,8 +18,15 @@ namespace Antmicro.Renode.PlatformDescription.UserInterface
     {
         public MonitorInitHandler(Machine machine, Monitor monitor)
         {
+            System.Console.Out.WriteLine("STUDIO [MonitorInitHandler] Initialized");
             this.machine = machine;
             this.monitor = monitor;
+            if (this.machine == null) {
+                System.Console.Out.WriteLine("STUDIO [MonitorInitHandler] this.machine is null");
+            }
+            if (this.monitor == null) {
+                System.Console.Out.WriteLine("STUDIO [MonitorInitHandler] this.monitor is null");
+            }
         }
 
         public void Execute(IInitable initable, IEnumerable<string> statements, Action<string> errorHandler)
@@ -30,6 +37,7 @@ namespace Antmicro.Renode.PlatformDescription.UserInterface
             string name;
             if(entry.Variable.Value is Machine)
             {
+                System.Console.Out.WriteLine("STUDIO [MonitorInitHandler] Execute name");
                 name = Machine.MachineKeyword;
             }
             else if(!machine.TryGetAnyName((IPeripheral)entry.Variable.Value, out name))
@@ -39,6 +47,7 @@ namespace Antmicro.Renode.PlatformDescription.UserInterface
             }
             foreach(var monitorCommand in statements.Select(x => string.Format("{0} {1}", name, x)))
             {
+                System.Console.Out.WriteLine("STUDIO [MonitorInitHandler] Execute Parse");
                 monitor.Parse(monitorCommand);
             }
         }

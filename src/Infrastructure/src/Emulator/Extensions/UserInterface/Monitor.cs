@@ -458,6 +458,7 @@ namespace Antmicro.Renode.UserInterface
 
         public bool Parse(string cmd, ICommandInteraction writer = null)
         {
+            System.Console.Out.WriteLine(string.Format("STUDIO [Monitor] Parse {0}", cmd));
             if(writer == null)
             {
                 writer = Interaction;
