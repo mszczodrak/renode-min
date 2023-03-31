@@ -160,22 +160,6 @@
       <Project>{43222114-707C-4EFD-8289-2728351FB7E9}</Project>
       <Name>cores-arm-m</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-i386.csproj">
-      <Project>{53222114-707C-4EFD-8289-2728351FB7E9}</Project>
-      <Name>cores-i386</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-ppc.csproj">
-      <Project>{23222114-707C-4EFD-8289-2728351FB7E9}</Project>
-      <Name>cores-ppc</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-ppc64.csproj">
-      <Project>{44422114-707C-4EFD-8289-2728351FB7E9}</Project>
-      <Name>cores-ppc64</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-sparc.csproj">
-      <Project>{13222114-707C-4EFD-8289-2728351FB7E9}</Project>
-      <Name>cores-sparc</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-riscv.csproj">
       <Project>{63222124-707C-5EFD-8289-2728351FB7E9}</Project>
       <Name>cores-riscv</Name>
@@ -207,10 +191,6 @@
     <ProjectReference Include="..\..\lib\Packet.Net\PacketDotNet\PacketDotNet.csproj">
       <Project>{55ABBA4C-AAF9-4726-A592-0C92436CEC92}</Project>
       <Name>PacketDotNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-xtensa.csproj">
-      <Project>{28F22125-F07D-5EF2-8289-4998351FBAA4}</Project>
-      <Name>cores-xtensa</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
