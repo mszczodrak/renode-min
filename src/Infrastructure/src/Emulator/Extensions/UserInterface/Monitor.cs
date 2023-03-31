@@ -28,6 +28,7 @@ namespace Antmicro.Renode.UserInterface
     {
         public ICommandInteraction HandleCommand(string cmd, ICommandInteraction ci)
         {
+            System.Console.Out.WriteLine("STUDIO [Monitor] HandleCommand {0}", cmd);
             Parse(cmd, ci);
             return ci;
         }
@@ -261,8 +262,8 @@ namespace Antmicro.Renode.UserInterface
             string machineName;
             if(EmulationManager.Instance.CurrentEmulation.TryGetMachineName(machine, out machineName))
             {
-                var activeMachine = _currentMachine;
-                _currentMachine = machine;
+                var activeMachine = currentMachine;
+                currentMachine = machine;
                 var macroName = GetVariableName("reset");
                 Token resetMacro;
                 if(macros.TryGetValue(macroName, out resetMacro))
@@ -277,7 +278,7 @@ namespace Antmicro.Renode.UserInterface
                 {
                     Logger.LogAs(this, LogLevel.Warning, "No action for reset - macro {0} is not registered.", macroName);
                 }
-                _currentMachine = activeMachine;
+                currentMachine = activeMachine;
             }
         }
 
@@ -1118,27 +1119,7 @@ namespace Antmicro.Renode.UserInterface
             }
         }
 
-        private Machine _currentMachine;
-
-        private Machine currentMachine
-        {
-            get
-            {
-                return _currentMachine;
-            }
-            set
-            {
-                _currentMachine = value;
-
-                var mc = MachineChanged;
-                if(mc != null)
-                {
-                    mc(_currentMachine != null ? Emulation[_currentMachine] : null);
-                }
-            }
-        }
-
-        public event Action<string> MachineChanged;
+        private Machine currentMachine;
 
         private readonly Tokenizer.Tokenizer tokenizer = Tokenizer.Tokenizer.CreateTokenizer();
 

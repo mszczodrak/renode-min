@@ -19,84 +19,67 @@ namespace Antmicro.Renode
                 Emulator.DisposeAll();
             };
             
-            //RunShell();
-            RunDirect();
+            RunShell();
+            // RunDirect();
         }
 
 
         public static void RunDirect() {
             System.Console.Out.WriteLine("STUDIO [Program] Hello Direct");
-            Logger.AddBackend(ConsoleBackend.Instance, "console");
 
-            var monitor = new UserInterface.Monitor();
+            Logger.AddBackend(ConsoleBackend.Instance, "console");
             var context = Core.ObjectCreator.Instance.OpenContext();
-            context.RegisterSurrogate(typeof(UserInterface.Monitor), monitor);
+            var monitor = new Antmicro.Renode.UserInterface.Monitor();
+            context.RegisterSurrogate(typeof(Antmicro.Renode.UserInterface.Monitor), monitor);
 
             var dummyWriter = new Antmicro.Renode.UserInterface.DummyCommandInteraction();
             monitor.Interaction = dummyWriter;
 
-            // mach create "STM32F4_Discovery"
-            Core.Machine machine;
-            machine = new Core.Machine();
-            Core.EmulationManager.Instance.CurrentEmulation.AddMachine(machine, "STM32F4_flat");
-            PlatformDescription.UserInterface.PlatformDescriptionMachineExtensions.LoadPlatformDescription(machine, "/home/marcin/src/renode-min/platforms/boards/stm32f4_flat.repl");
+            monitor.HandleCommand("mach create STM32F4_Flat", null);
+            monitor.HandleCommand("machine LoadPlatformDescription @platforms/boards/stm32f4_flat.repl", null);
+            monitor.HandleCommand("sysbus.cpu PerformanceInMips 125", null);
+            monitor.HandleCommand("emulation CreateServerSocketTerminal 3456 term", null);
+            monitor.HandleCommand("connector Connect sysbus.uart4 term", null);
+            monitor.HandleCommand("sysbus LoadELF @https://dl.antmicro.com/projects/renode/stm32f4discovery.elf-s_445441-827a0dedd3790f4559d7518320006613768b5e72", null);
+            monitor.HandleCommand("start", null);
 
-            // machine LoadPlatformDescription @platforms/boards/stm32f4_discovery-kit.repl
-
-            var sysbus = machine.SystemBus;
-            var cpus = sysbus.GetCPUs();
-            System.Console.Out.WriteLine("STUDIO [Program] Number of CPUs is {0}", cpus.Count());
-
-            var peripheralCommand = new UserInterface.Commands.PeripheralsCommand(monitor, () => machine);
-
-
-
-
-            // cpu PerformanceInMips 125
-            // see CpuKeyword.cs file
-            // var cpu = sysbus.GetCPUId(0)  as Antmicro.Renode.Peripherals.CPU.BaseCPU;
-            // cpu.PerformanceInMips = 125;
+            Thread.Sleep(6000);
         }
 
 
         public static void RunShell()
         {
             System.Console.Out.WriteLine("STUDIO [Program] Hello Shell");
+
             Logger.AddBackend(ConsoleBackend.Instance, "console");
-
             var context = Core.ObjectCreator.Instance.OpenContext();
+            var monitor = new Antmicro.Renode.UserInterface.Monitor();
+            context.RegisterSurrogate(typeof(Antmicro.Renode.UserInterface.Monitor), monitor);
+
+            Shell shell = null;
+
+            System.Console.Out.WriteLine("STUDIO [Program] Shell on port");
+            var io = new IOProvider()
+            {
+                Backend = new Utilities.SocketIOSource(1234)
+            };
+            shell = UserInterface.ShellProvider.GenerateShell(monitor, true);
+            shell.Terminal = new NavigableTerminalEmulator(io, true);
+
+            Logger.Log(LogLevel.Info, "Monitor available in telnet mode on port {0}", 1234);
             
-                var monitor = new Antmicro.Renode.UserInterface.Monitor();
-                context.RegisterSurrogate(typeof(Antmicro.Renode.UserInterface.Monitor), monitor);
+            shell.Quitted += Emulator.Exit;
+            monitor.Interaction = shell.Writer;
 
-                Shell shell = null;
+            new System.Threading.Thread(x => shell.Start(true))
+            {
+                IsBackground = true,
+                Name = "Shell thread"
+            }.Start();
 
-                System.Console.Out.WriteLine("STUDIO [Program] Shell on port");
-                var io = new IOProvider()
-                {
-                    Backend = new Utilities.SocketIOSource(1234)
-                };
-                shell = UserInterface.ShellProvider.GenerateShell(monitor, true);
-                shell.Terminal = new NavigableTerminalEmulator(io, true);
-
-                Logger.Log(LogLevel.Info, "Monitor available in telnet mode on port {0}", 1234);
-                
-                shell.Quitted += Emulator.Exit;
-
-                monitor.Interaction = shell.Writer;
-                monitor.MachineChanged += emu => shell.SetPrompt(emu != null ? new Prompt(string.Format("({0}) ", emu), ConsoleColor.DarkYellow) : null);
-
-                shell.Terminal.PlainMode = false;
-
-                new System.Threading.Thread(x => shell.Start(true))
-                {
-                    IsBackground = true,
-                    Name = "Shell thread"
-                }.Start();
-
-                System.Console.Out.WriteLine("STUDIO [Program] Wait");
-                Emulator.WaitForExit();
-                System.Console.Out.WriteLine("STUDIO [Program] Exit");
+            System.Console.Out.WriteLine("STUDIO [Program] Wait");
+            Emulator.WaitForExit();
+            System.Console.Out.WriteLine("STUDIO [Program] Exit");
             
         }
         
