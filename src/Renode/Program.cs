@@ -49,8 +49,6 @@ namespace Antmicro.Renode
             // see CpuKeyword.cs file
             //var cpu = sysbus.GetCPUId(0)  as Antmicro.Renode.Peripherals.CPU.BaseCPU;
             //cpu.PerformanceInMips = 125;
-
-            // 
         }
 
 
