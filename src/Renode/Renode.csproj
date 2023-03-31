@@ -139,10 +139,6 @@
       <Project>{43222114-707C-4EFD-8289-2728351FB7E9}</Project>
       <Name>cores-arm-m</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-riscv.csproj">
-      <Project>{63222124-707C-5EFD-8289-2728351FB7E9}</Project>
-      <Name>cores-riscv</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\src\Emulator\Peripherals\Peripherals.csproj">
       <Project>{66400796-0C5B-4386-A859-50A2AC3F3DB7}</Project>
       <Name>Peripherals</Name>
@@ -150,10 +146,6 @@
     <ProjectReference Include="..\Infrastructure\src\Plugins\TracePlugin\TracePlugin.csproj">
       <Project>{887C6088-F483-466A-A671-06EEC42B8DC1}</Project>
       <Name>TracePlugin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\src\Emulator\Cores\cores-riscv64.csproj">
-      <Project>{BB222124-707C-5EFD-8289-2728351FB7AA}</Project>
-      <Name>cores-riscv64</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\lib\Packet.Net\PacketDotNet\PacketDotNet.csproj">
       <Project>{55ABBA4C-AAF9-4726-A592-0C92436CEC92}</Project>
