@@ -43,9 +43,6 @@
     <Reference Include="Sprache">
       <HintPath>..\..\lib\resources\libraries\Sprache.dll</HintPath>
     </Reference>
-    <Reference Include="CookComputing.XmlRpcV2">
-      <HintPath>..\..\lib\resources\libraries\CookComputing.XmlRpcV2.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,23 +86,6 @@
     <Compile Include="PlatformDescription\Syntax\SyntaxTreeHelpers.cs" />
     <Compile Include="PlatformDescription\Syntax\UsingEntry.cs" />
     <Compile Include="PlatformDescription\Syntax\Value.cs" />
-    <Compile Include="RobotFrameworkEngine\RobotFrameworkEngine.cs" />
-    <Compile Include="RobotFrameworkEngine\HotSpotAction.cs" />
-    <Compile Include="RobotFrameworkEngine\HttpServer.cs" />
-    <Compile Include="RobotFrameworkEngine\IRobotFrameworkKeywordProvider.cs" />
-    <Compile Include="RobotFrameworkEngine\Keyword.cs" />
-    <Compile Include="RobotFrameworkEngine\KeywordException.cs" />
-    <Compile Include="RobotFrameworkEngine\KeywordManager.cs" />
-    <Compile Include="RobotFrameworkEngine\Recorder.cs" />
-    <Compile Include="RobotFrameworkEngine\RenodeKeywords.cs" />
-    <Compile Include="RobotFrameworkEngine\RobotFrameworkKeywordAttribute.cs" />
-    <Compile Include="RobotFrameworkEngine\TestersProvider.cs" />
-    <Compile Include="RobotFrameworkEngine\NetworkInterfaceKeywords.cs" />
-    <Compile Include="RobotFrameworkEngine\UartKeywords.cs" />
-    <Compile Include="RobotFrameworkEngine\XmlRpcServer.cs" />
-    <Compile Include="RobotFrameworkEngine\HelperExtensions.cs" />
-    <Compile Include="RobotFrameworkEngine\LogTester.cs" />
-    <Compile Include="RobotFrameworkEngine\CpuKeywords.cs" />
     <Compile Include="Network\RangeLossMediumFunction.cs" />
     <Compile Include="Network\RangeMediumFunction.cs" />
     <Compile Include="PlatformDescription\UserInterface\MonitorInitHandler.cs" />

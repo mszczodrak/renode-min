@@ -770,7 +770,6 @@ namespace Antmicro.Renode.Utilities
             "BigGustave.dll",
             "BitMiracle.LibJpeg.NET.dll",
             "CairoSharp.dll",
-            "CookComputing.XmlRpcV2.dll",
             "crypto.dll",
             "CxxDemangler.dll",
             "Dynamitey.dll",

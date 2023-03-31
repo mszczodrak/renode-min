@@ -33,11 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeripheralsTests", "src\Inf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracePlugin", "src\Infrastructure\src\Plugins\TracePlugin\TracePlugin.csproj", "{887C6088-F483-466A-A671-06EEC42B8DC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenodeTests", "tests\unit-tests\RenodeTests\RenodeTests.csproj", "{779FB07B-87EB-472D-ABC4-ACBED1A5D9FC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{8BD709BF-8C11-4CBA-9A7D-CC2CC639BD4F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CD9D4CF9-BD98-4D57-A5EF-EA5C3C75CB0C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cores", "Cores", "{4671F602-D5E2-4F4E-B942-3357C33C92E2}"
 EndProject
