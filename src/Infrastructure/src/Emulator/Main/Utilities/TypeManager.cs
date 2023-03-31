@@ -767,7 +767,6 @@ namespace Antmicro.Renode.Utilities
         {
             "AntShell.dll",
             "AtkSharp.dll",
-            "BigGustave.dll",
             "BitMiracle.LibJpeg.NET.dll",
             "CairoSharp.dll",
             "crypto.dll",

@@ -338,7 +338,6 @@
     <Compile Include="Peripherals\EndianessAttribute.cs" />
     <Compile Include="Core\GPIOConnection.cs" />
     <Compile Include="Peripherals\BackendManager.cs" />
-    <Compile Include="Peripherals\Video\IVideo.cs" />
     <Compile Include="Core\INumberedGPIOOutput.cs" />
     <Compile Include="Peripherals\BasicPeripheralBackendAnalyzer.cs" />
     <Compile Include="Utilities\Collections\SerializableWeakKeyDictionary.cs" />
@@ -434,7 +433,6 @@
     <Compile Include="Peripherals\Python\PeripheralPythonEngine.cs" />
     <Compile Include="Peripherals\Miscellaneous\ILed.cs" />
     <Compile Include="Peripherals\Miscellaneous\CombinedInput.cs" />
-    <Compile Include="Peripherals\Video\AutoRepaintingVideo.cs" />
     <Compile Include="Peripherals\Python\PythonPeripheral.cs" />
     <Compile Include="Peripherals\Memory\MappedMemory.cs" />
     <Compile Include="Peripherals\Input\IPS2Peripheral.cs" />
@@ -445,7 +443,6 @@
     <Compile Include="Peripherals\Bus\Access.cs" />
     <Compile Include="Debug\DebugHelper.cs" />
     <Compile Include="Peripherals\Bus\BusHookHandler.cs" />
-    <Compile Include="Testing\FrameBufferTester.cs" />
     <Compile Include="Peripherals\InterruptHandler.cs" />
     <Compile Include="Peripherals\CPU\BreakpointType.cs" />
     <Compile Include="Peripherals\CPU\HaltArguments.cs" />
@@ -538,7 +535,6 @@
     <Compile Include="Peripherals\USB\CDC\FunctionalDescriptor.cs" />
     <Compile Include="Peripherals\I2C\I2CPeripheralBase.cs" />
     <Compile Include="Peripherals\Sensor\ICPIPeripheral.cs" />
-    <Compile Include="Utilities\RawImageData.cs" />
     <Compile Include="Utilities\LibCWrapper.cs" />
     <Compile Include="Utilities\ByteArrayWithAccessTracking.cs" />
     <Compile Include="Utilities\Crypto\PRINCECipher.cs" />
@@ -611,10 +607,6 @@
     <ProjectReference Include="..\..\..\..\..\lib\CxxDemangler\CxxDemangler\CxxDemangler.csproj">
       <Project>{3A70B9B8-BBAB-47EA-8473-B7A0B4961D56}</Project>
       <Name>CxxDemangler</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\lib\BigGustave\src\BigGustave\BigGustave.csproj">
-      <Project>{959D076C-8127-4FEE-9737-0F8FDE5A0E09}</Project>
-      <Name>BigGustave</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

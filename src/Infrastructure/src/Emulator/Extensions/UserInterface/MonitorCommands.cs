@@ -334,10 +334,6 @@ namespace Antmicro.Renode.UserInterface
                 }
                 writer.Write("\r\n]" + endl);
             }
-            else if(result is RawImageData image)
-            {
-                writer.WriteRaw(InlineImage.Encode(image.ToPng()));
-            }
             else
             {
                 writer.Write(string.Format(CultureInfo.InvariantCulture, "{0}" + endl, result));

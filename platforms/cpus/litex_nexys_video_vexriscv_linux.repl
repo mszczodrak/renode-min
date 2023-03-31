@@ -48,12 +48,4 @@ sysbus:
     init add:
         SilenceRange <0xf0005800 0x200> # sdram
 
-litex_video: Video.LiteX_Framebuffer_CSR32 @ {
-    sysbus new Bus.BusMultiRegistration { address: 0xf0006000; size: 0xc; region: "dma" };
-    sysbus new Bus.BusMultiRegistration { address: 0xf0006800; size: 0x24; region: "vtg" }
-}
-    format: PixelFormat.XBGR8888
-    memory: main_ram
-    offset: 0x00c00000
-    hres: 800
-    vres: 600
+

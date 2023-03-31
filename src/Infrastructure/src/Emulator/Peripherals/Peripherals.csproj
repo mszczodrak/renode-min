@@ -141,10 +141,6 @@
     <Compile Include="Peripherals\SPI\UARTToSpiConverter.cs" />
     <Compile Include="Peripherals\USBDeprecated\IUSBPeripheral.cs" />
     <Compile Include="Peripherals\USBDeprecated\SCSI.cs" />
-    <Compile Include="Peripherals\Video\TegraSyncpts.cs" />
-    <Compile Include="Peripherals\Video\VybridDCU.cs" />
-    <Compile Include="Peripherals\Video\PL110.cs" />
-    <Compile Include="Peripherals\Video\TegraDisplay.cs" />
     <Compile Include="Peripherals\Network\SMC91X.cs" />
     <Compile Include="Peripherals\I2C\Cadence_I2C.cs" />
     <Compile Include="Peripherals\I2C\VybridI2C.cs" />
@@ -231,7 +227,6 @@
     <Compile Include="Peripherals\UART\STM32F7_USART.cs" />
     <Compile Include="Peripherals\DMA\Dma2DColorMode.cs" />
     <Compile Include="Peripherals\DMA\STM32DMA2D.cs" />
-    <Compile Include="Peripherals\Video\STM32LTDC.cs" />
     <Compile Include="Peripherals\Wireless\CC2538\InterruptRegister.cs" />
     <Compile Include="Peripherals\Wireless\CC2538\InterruptSource.cs" />
     <Compile Include="Peripherals\Wireless\CC2538RF.cs" />
@@ -321,7 +316,6 @@
     <Compile Include="Peripherals\I2C\LiteX_I2C.cs" />
     <Compile Include="Peripherals\I2C\LiteX_I2C_Zephyr.cs" />
     <Compile Include="Peripherals\SPI\PicoRV_SPI.cs" />
-    <Compile Include="Peripherals\Video\LiteX_Framebuffer.cs" />
     <Compile Include="Peripherals\USB\USBKeyboard.cs" />
     <Compile Include="Peripherals\Wireless\IEEE802_15_4\PHYHeader802154.cs" />
     <Compile Include="Peripherals\SPI\MAX3421E.cs" />
@@ -375,7 +369,6 @@
     <Compile Include="Peripherals\Sensors\LSM330_Accelerometer.cs" />
     <Compile Include="Peripherals\Sensors\LSM330_Gyroscope.cs" />
     <Compile Include="Peripherals\Timers\NRF52840_Timer.cs" />
-    <Compile Include="Peripherals\Sensors\ArduCAMMini2MPPlus.cs" />
     <Compile Include="Peripherals\Sensors\OV2640.cs" />
     <Compile Include="Peripherals\Sensors\LIS2DS12.cs" />
     <Compile Include="Peripherals\Sensors\LIS2DW12.cs" />
@@ -455,11 +448,9 @@
     <Compile Include="Peripherals\Miscellaneous\WindowIOMMU.cs" />
     <Compile Include="Peripherals\Miscellaneous\ExternalWindowMMU.cs" />
     <Compile Include="Peripherals\Mocks\SimpleDMA.cs" />
-    <Compile Include="Peripherals\Video\MusteinGenericGPU.cs" />
     <Compile Include="Peripherals\UART\SAMD5_UART.cs" />
     <Compile Include="Peripherals\Miscellaneous\LiteX_MMCM_CSR32.cs" />
     <Compile Include="Peripherals\UART\SAMD20_UART.cs" />
-    <Compile Include="Peripherals\Video\LiteX_Framebuffer_CSR32.cs" />
     <Compile Include="Peripherals\UART\USBSerialPort_S3B.cs" />
     <Compile Include="Peripherals\Miscellaneous\MAX32650_GCR.cs" />
     <Compile Include="Peripherals\UART\MAX32650_UART.cs" />
