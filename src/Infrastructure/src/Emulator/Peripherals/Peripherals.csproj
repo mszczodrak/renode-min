@@ -244,12 +244,9 @@
     <Compile Include="Peripherals\Wireless\IEEE802_15_4\AddressingMode.cs" />
     <Compile Include="Peripherals\Wireless\IEEE802_15_4\AddressInformation.cs" />
     <Compile Include="Peripherals\Wireless\IEEE802_15_4\Address.cs" />
-    <Compile Include="Peripherals\SPI\Quark_SPI.cs" />
     <Compile Include="Peripherals\Network\ENC28J60.cs" />
     <Compile Include="Peripherals\Sensors\MC3635.cs" />
     <Compile Include="Peripherals\Sensors\TI_LM74.cs" />
-    <Compile Include="Peripherals\GPIOPort\Quark_GPIOController.cs" />
-    <Compile Include="Peripherals\GPIOPort\Quark_PWM.cs" />
     <Compile Include="Peripherals\GPIOPort\HiFive_PWM.cs" />
     <Compile Include="Peripherals\Wireless\CC2520.cs" />
     <Compile Include="Peripherals\Wireless\CC1200.cs" />
@@ -288,7 +285,6 @@
     <Compile Include="Peripherals\Network\LiteX_Ethernet.cs" />
     <Compile Include="Peripherals\UART\PicoSoC_SimpleUART.cs" />
     <Compile Include="Peripherals\Sensors\DummySensor.cs" />
-    <Compile Include="Peripherals\Miscellaneous\Quark_SystemControlSubsystem.cs" />
     <Compile Include="Peripherals\UART\SiFive_UART.cs" />
     <Compile Include="Peripherals\UART\SAM_USART.cs" />
     <Compile Include="Peripherals\UART\Potato_UART.cs" />
