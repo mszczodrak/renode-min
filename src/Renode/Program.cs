@@ -43,7 +43,7 @@ namespace Antmicro.Renode
             monitor.HandleCommand("sysbus LoadELF @https://dl.antmicro.com/projects/renode/stm32f4discovery.elf-s_445441-827a0dedd3790f4559d7518320006613768b5e72", null);
             monitor.HandleCommand("start", null);
 
-            Thread.Sleep(6000);
+            Thread.Sleep(5000);
         }
 
 
