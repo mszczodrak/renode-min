@@ -54,6 +54,7 @@ namespace Antmicro.Renode.UserInterface.Commands
 
         public ExecuteCommand(Monitor monitor, string name, string noun, Func<VariableToken, Token> getVariable, Func<IEnumerable<string>> getVariables):base(monitor, name, "executes a command or the content of a {0}.".FormatWith(noun))
         {
+            System.Console.Out.WriteLine("STUDIO [ExecuteCommand] init");
             GetVariable = getVariable;
             GetVariables = getVariables;
             this.noun = noun;
