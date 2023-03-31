@@ -79,7 +79,7 @@ namespace AntShell
 
         public void Start()
         {
-            Console.Out.WriteLine("AntShell Shell!");
+            System.Console.Out.WriteLine("STUDIO [AntShell] Shell Start");
             CurrentPrompt.Write(terminal);
         }
 

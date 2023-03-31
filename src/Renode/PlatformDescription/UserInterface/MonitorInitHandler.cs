@@ -24,7 +24,7 @@ namespace Antmicro.Renode.PlatformDescription.UserInterface
 
         public void Execute(IInitable initable, IEnumerable<string> statements, Action<string> errorHandler)
         {
-            System.Console.Out.WriteLine("MonitorInitHandler::Execute");
+            System.Console.Out.WriteLine("STUDIO [MonitorInitHandler] Execute");
 
             var entry = initable as Entry;
             string name;

@@ -23,6 +23,7 @@ namespace Antmicro.Renode.Peripherals.UART
     {
         public UARTBackend()
         {
+            System.Console.Out.WriteLine("STUDIO [UARTBackend] Created");
             history = new CircularBuffer<byte>(BUFFER_SIZE);
             actionsDictionary = new Dictionary<IOProvider, Action<byte>>();
         }

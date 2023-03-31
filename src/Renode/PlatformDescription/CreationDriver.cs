@@ -53,21 +53,24 @@ namespace Antmicro.Renode.PlatformDescription
             }
             var source = File.ReadAllText(path);
             usingsBeingProcessed.Push(Path.GetFullPath(path)); // don't need to pop since stack is cleared within ProcessInner
-            System.Console.Out.WriteLine("ProcessFile");
+            System.Console.Out.WriteLine("STUDIO [CreationDrivers] ProcessFile");
             ProcessInner(path, source);
         }
 
         private void ProcessInner(string file, string source)
         {
+            System.Console.Out.WriteLine(string.Format("STUDIO [CreationDrivers] ProcessInner {0} {1}", file, source));
             try
             {
                 ValidatePreMerge(file, source, "");
                 var mergedEntries = variableStore.GetMergedEntries();
                 foreach(var entry in mergedEntries)
                 {
+                    // System.Console.Out.WriteLine(string.Format("STUDIO [CreationDrivers] ProcessInner ValidateEntryPostMerge entry {0}", entry));
                     ValidateEntryPostMerge(entry);
                 }
                 var sortedEntries = SortEntries(mergedEntries);
+                System.Console.Out.WriteLine(string.Format("STUDIO [CreationDrivers] ProcessInner CreateFromEntries"));
                 foreach(var entry in sortedEntries)
                 {
                     CreateFromEntry(entry);
@@ -75,6 +78,7 @@ namespace Antmicro.Renode.PlatformDescription
 
                 foreach(var entry in sortedEntries)
                 {
+                    System.Console.Out.WriteLine(string.Format("STUDIO [CreationDrivers] ProcessInner SetPropertiesAndConnectInterrupts entry {0}", entry.VariableName));
                     SetPropertiesAndConnectInterrupts(entry.Variable.Value, entry.Attributes);
                 }
                 UpdatePropertiesAndInterruptsOnUpdateQueue();
@@ -87,30 +91,34 @@ namespace Antmicro.Renode.PlatformDescription
 
                 while(objectValueInitQueue.Count > 0)
                 {
-                    System.Console.Out.WriteLine("objectValueInitQueue");
+                    System.Console.Out.WriteLine("STUDIO [CreationDrivers] ProcessInner objectValueInitQueue");
                     var objectValue = objectValueInitQueue.Dequeue();
                     initHandler.Execute(objectValue, objectValue.Attributes.OfType<InitAttribute>().Single().Lines,
                                         x => HandleInitableError(x, objectValue));
                 }
                 foreach(var entry in sortedEntries)
                 {
+                    // System.Console.Out.WriteLine(string.Format("STUDIO [CreationDrivers] ProcessInner initAttribute for entry {0}", entry.VariableName));
                     var initAttribute = entry.Attributes.OfType<InitAttribute>().SingleOrDefault();
                     if(initAttribute == null)
                     {
                         continue;
                     }
-                    System.Console.Out.WriteLine("sortedEntries");
+                    System.Console.Out.WriteLine(string.Format("STUDIO [CreationDrivers] ProcessInner initAttribute Execute entry {0}", entry.VariableName));
                     initHandler.Execute(entry, initAttribute.Lines, x => HandleInitableError(x, entry));
                 }
             }
             finally
             {
+                System.Console.Out.WriteLine("STUDIO [CreationDrivers] ProcessInner finally");
                 variableStore.Clear();
                 processedDescriptions.Clear();
                 objectValueUpdateQueue.Clear();
                 objectValueInitQueue.Clear();
                 usingsBeingProcessed.Clear();
+                System.Console.Out.WriteLine("STUDIO [CreationDrivers] ProcessInner finally all clear");
                 PrepareVariables();
+                System.Console.Out.WriteLine("STUDIO [CreationDrivers] ProcessInner finally done");
             }
             machine.PostCreationActions();
         }
@@ -556,6 +564,7 @@ namespace Antmicro.Renode.PlatformDescription
             {
                 return;
             }
+            System.Console.Out.WriteLine(string.Format("STUDIO [CreationDrivers] ProcessInner CreateFromEntry entry {0}", entry.VariableName));
             var constructor = entry.Constructor;
             entry.Variable.Value = CreateAndHandleError(constructor, entry.Attributes, string.Format("'{0}'", entry.VariableName), entry.Type);
         }
@@ -796,9 +805,11 @@ namespace Antmicro.Renode.PlatformDescription
 
         private List<Entry> RegisterFromEntries(IEnumerable<Entry> sortedEntries)
         {
+            System.Console.Out.WriteLine("STUDIO [CreationDrivers] RegisterFromEntries");
             var result = new List<Entry>();
             foreach(var entry in sortedEntries)
             {
+                System.Console.Out.WriteLine(string.Format("STUDIO [CreationDrivers] ProcessInner RegisterFromEntries TryRegisterFromEntry entry {0}", entry.VariableName));
                 if(!TryRegisterFromEntry(entry))
                 {
                     result.Add(entry);

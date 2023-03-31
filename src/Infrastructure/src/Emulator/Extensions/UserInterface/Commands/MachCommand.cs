@@ -102,6 +102,7 @@ namespace Antmicro.Renode.UserInterface.Commands
                 }
                 break;
             case "create":
+                System.Console.Out.WriteLine(string.Format("STUDIO [MachCommand] mach create 1 [name {0}]", name.Value));
                 machine = new Machine();
                 EmulationManager.Instance.CurrentEmulation.AddMachine(machine, name.Value);
                 SetCurrentMachine(machine);
@@ -118,6 +119,7 @@ namespace Antmicro.Renode.UserInterface.Commands
                 SetCurrentMachine(null);
                 break;
             case "create":
+                System.Console.Out.WriteLine("STUDIO [MachCommand] mach create 2");
                 var machine = new Machine();
                 EmulationManager.Instance.CurrentEmulation.AddMachine(machine);
                 SetCurrentMachine(machine);
@@ -131,7 +133,7 @@ namespace Antmicro.Renode.UserInterface.Commands
         public MachCommand(Monitor monitor, Func<Machine> getCurrentMachine, Action<Machine> setCurrentMachine) 
             : base(monitor, "mach", "list and manipulate machines available in the environment.")
         {
-            Console.Out.WriteLine("Mach Command!");
+            System.Console.Out.WriteLine("STUDIO [MachCommand] Mach Command {list}");
             GetCurrentMachine = getCurrentMachine;
             SetCurrentMachine = setCurrentMachine;
         }

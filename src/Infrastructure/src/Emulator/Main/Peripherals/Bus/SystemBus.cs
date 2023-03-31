@@ -936,6 +936,7 @@ namespace Antmicro.Renode.Peripherals.Bus
 
         public void ApplySVD(string path)
         {
+            System.Console.Out.WriteLine(string.Format("STUDIO [SystemBus] ApplySVD {0}", path));
             var svdDevice = new SVDParser(path, this);
             svdDevices.Add(svdDevice);
         }

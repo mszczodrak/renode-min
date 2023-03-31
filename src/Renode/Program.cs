@@ -43,7 +43,7 @@ namespace Antmicro.Renode
 
             var sysbus = machine.SystemBus;
             var cpus = sysbus.GetCPUs();
-            Console.Out.WriteLine("Number of CPUs is {0}", cpus.Count());
+            System.Console.Out.WriteLine("STUDIO [Program] Number of CPUs is {0}", cpus.Count());
 
             // cpu PerformanceInMips 125
             // see CpuKeyword.cs file
@@ -54,7 +54,7 @@ namespace Antmicro.Renode
 
         public static void RunShell()
         {
-            Console.Out.WriteLine("HELLO!");
+            System.Console.Out.WriteLine("STUDIO [Program] Hello Shell");
             Logger.AddBackend(ConsoleBackend.Instance, "console");
 
             using(var context = ObjectCreator.Instance.OpenContext())
@@ -64,7 +64,7 @@ namespace Antmicro.Renode
 
                 Shell shell = null;
 
-                Console.Out.WriteLine("Shell on port!");
+                System.Console.Out.WriteLine("STUDIO [Program] Shell on port");
                 var io = new IOProvider()
                 {
                     Backend = new SocketIOSource(1234)
@@ -87,9 +87,9 @@ namespace Antmicro.Renode
                     Name = "Shell thread"
                 }.Start();
 
-                Console.Out.WriteLine("Wait!");
+                System.Console.Out.WriteLine("STUDIO [Program] Wait");
                 Emulator.WaitForExit();
-                Console.Out.WriteLine("Exit!");
+                System.Console.Out.WriteLine("STUDIO [Program] Exit");
             }
         }
         
