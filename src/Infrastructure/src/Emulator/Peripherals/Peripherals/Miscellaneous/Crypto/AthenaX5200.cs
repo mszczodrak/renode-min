@@ -17,11 +17,12 @@ namespace Antmicro.Renode.Peripherals.Miscellaneous.Crypto
     {
         public AthenaX5200(Machine machine)
         {
+            // HACK
+            // Removed msgAuthServiceProvider
             memoryManager = new InternalMemoryManager();
             RegistersCollection = new DoubleWordRegisterCollection(this);
             rsaServiceProvider = new RSAServiceProvider(memoryManager);
             aesServiceProvider = new AESServiceProvider(memoryManager, machine.SystemBus);
-            msgAuthServiceProvider = new MessageAuthenticationServiceProvider(memoryManager, machine.SystemBus);
             dsaServiceProvider = new DSAServiceProvider(memoryManager, machine.SystemBus);
 
             Registers.CSR.Define(this)
@@ -78,11 +79,6 @@ namespace Antmicro.Renode.Peripherals.Miscellaneous.Crypto
                 { JumpTable.DecryptCipherRSA, rsaServiceProvider.DecryptData },
                 { JumpTable.RunAES, aesServiceProvider.PerformAESOperation },
                 { JumpTable.RunAES_DMA, aesServiceProvider.PerformAESOperationDMA },
-                { JumpTable.RunGCM, msgAuthServiceProvider.PerformGCMMessageAuthentication },
-                { JumpTable.RunGCMNew, msgAuthServiceProvider.PerformGCMMessageAuthentication },
-                { JumpTable.RunSHA, msgAuthServiceProvider.PerformSHA },
-                { JumpTable.RunSHADMA, msgAuthServiceProvider.PerformSHADMA },
-                { JumpTable.RunHMACSHA, msgAuthServiceProvider.PerformHMACSHA },
                 { JumpTable.RunDSA_Sign, dsaServiceProvider.SignDMA },
             };
 
@@ -108,7 +104,6 @@ namespace Antmicro.Renode.Peripherals.Miscellaneous.Crypto
         {
             memoryManager.ResetMemories();
             RegistersCollection.Reset();
-            msgAuthServiceProvider.Reset();
             rsaServiceProvider.Reset();
             aesServiceProvider.Reset();
             randomGenerator?.Reset();
@@ -165,7 +160,6 @@ namespace Antmicro.Renode.Peripherals.Miscellaneous.Crypto
         private readonly IFlagRegisterField coreExecuteCommand;
         private readonly RSAServiceProvider rsaServiceProvider;
         private readonly AESServiceProvider aesServiceProvider;
-        private readonly MessageAuthenticationServiceProvider msgAuthServiceProvider;
         private readonly DSAServiceProvider dsaServiceProvider;
         
         private enum JumpTable
