@@ -94,7 +94,6 @@ namespace Antmicro.Renode
                 Console.Out.WriteLine("Exit!");
             }
         }
-
         
     }
 }
