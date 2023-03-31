@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BouncyCastle.iOS", "crypto\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BouncyCastle.Android", "crypto\BouncyCastle.Android.csproj", "{A0D302CB-8866-4AB1-98B9-F0772EABF5DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "crypto\test\UnitTests.csproj", "{D4EB669D-7C88-48C0-A480-C5CC73A7369B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

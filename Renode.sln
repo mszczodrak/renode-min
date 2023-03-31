@@ -25,12 +25,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cores-riscv", "src\Infrastr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peripherals", "src\Infrastructure\src\Emulator\Peripherals\Peripherals.csproj", "{66400796-0C5B-4386-A859-50A2AC3F3DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitorTests", "src\Infrastructure\src\Emulator\Extensions\MonitorTests\MonitorTests.csproj", "{BA29DA30-C9D7-492C-81D4-E76754C0D88D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "src\Infrastructure\src\Emulator\Main\Tests\UnitTests\UnitTests.csproj", "{E0E61E22-8E42-4ED8-8C1F-D683D7EC9FF6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeripheralsTests", "src\Infrastructure\src\Emulator\Peripherals\Test\PeripheralsTests\PeripheralsTests.csproj", "{4FBABBAC-D029-4867-8416-32C3469BCAEA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracePlugin", "src\Infrastructure\src\Plugins\TracePlugin\TracePlugin.csproj", "{887C6088-F483-466A-A671-06EEC42B8DC1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{8BD709BF-8C11-4CBA-9A7D-CC2CC639BD4F}"
@@ -76,12 +70,6 @@ Global
 		{63222124-707C-5EFD-8289-2728351FB7E9}.ReleaseHeadless|Any CPU.Build.0 = Release|Any CPU
 		{66400796-0C5B-4386-A859-50A2AC3F3DB7}.ReleaseHeadless|Any CPU.ActiveCfg = Release|Any CPU
 		{66400796-0C5B-4386-A859-50A2AC3F3DB7}.ReleaseHeadless|Any CPU.Build.0 = Release|Any CPU
-		{BA29DA30-C9D7-492C-81D4-E76754C0D88D}.ReleaseHeadless|Any CPU.ActiveCfg = Release|Any CPU
-		{BA29DA30-C9D7-492C-81D4-E76754C0D88D}.ReleaseHeadless|Any CPU.Build.0 = Release|Any CPU
-		{E0E61E22-8E42-4ED8-8C1F-D683D7EC9FF6}.ReleaseHeadless|Any CPU.ActiveCfg = Release|Any CPU
-		{E0E61E22-8E42-4ED8-8C1F-D683D7EC9FF6}.ReleaseHeadless|Any CPU.Build.0 = Release|Any CPU
-		{4FBABBAC-D029-4867-8416-32C3469BCAEA}.ReleaseHeadless|Any CPU.ActiveCfg = Release|Any CPU
-		{4FBABBAC-D029-4867-8416-32C3469BCAEA}.ReleaseHeadless|Any CPU.Build.0 = Release|Any CPU
 		{887C6088-F483-466A-A671-06EEC42B8DC1}.ReleaseHeadless|Any CPU.ActiveCfg = Release|Any CPU
 		{887C6088-F483-466A-A671-06EEC42B8DC1}.ReleaseHeadless|Any CPU.Build.0 = Release|Any CPU
 		{BB222124-707C-5EFD-8289-2728351FB7AA}.ReleaseHeadless|Any CPU.ActiveCfg = Release|Any CPU
@@ -93,9 +81,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{887C6088-F483-466A-A671-06EEC42B8DC1} = {8BD709BF-8C11-4CBA-9A7D-CC2CC639BD4F}
-		{BA29DA30-C9D7-492C-81D4-E76754C0D88D} = {CD9D4CF9-BD98-4D57-A5EF-EA5C3C75CB0C}
-		{E0E61E22-8E42-4ED8-8C1F-D683D7EC9FF6} = {CD9D4CF9-BD98-4D57-A5EF-EA5C3C75CB0C}
-		{4FBABBAC-D029-4867-8416-32C3469BCAEA} = {CD9D4CF9-BD98-4D57-A5EF-EA5C3C75CB0C}
 		{13222124-707C-5EFD-8289-2728351FB7E9} = {4671F602-D5E2-4F4E-B942-3357C33C92E2}
 		{43222114-707C-4EFD-8289-2728351FB7E9} = {4671F602-D5E2-4F4E-B942-3357C33C92E2}
 		{63222124-707C-5EFD-8289-2728351FB7E9} = {4671F602-D5E2-4F4E-B942-3357C33C92E2}
