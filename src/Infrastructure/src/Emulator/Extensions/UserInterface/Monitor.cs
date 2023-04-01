@@ -28,6 +28,7 @@ namespace Antmicro.Renode.UserInterface
     {
         public ICommandInteraction HandleCommand(string cmd, ICommandInteraction ci)
         {
+            System.Console.Out.WriteLine("");
             System.Console.Out.WriteLine("STUDIO [Monitor] HandleCommand {0}", cmd);
             Parse(cmd, ci);
             return ci;

@@ -19,8 +19,8 @@ namespace Antmicro.Renode
                 Emulator.DisposeAll();
             };
             
-            RunShell();
-            // RunDirect();
+            // RunShell();
+            RunDirect();
         }
 
 
@@ -32,18 +32,18 @@ namespace Antmicro.Renode
             var monitor = new Antmicro.Renode.UserInterface.Monitor();
             context.RegisterSurrogate(typeof(Antmicro.Renode.UserInterface.Monitor), monitor);
 
-            var dummyWriter = new Antmicro.Renode.UserInterface.DummyCommandInteraction();
+            var dummyWriter = new Antmicro.Renode.UserInterface.DummyCommandInteraction(true);
             monitor.Interaction = dummyWriter;
 
-            monitor.HandleCommand("mach create STM32F4_Flat", null);
+            monitor.HandleCommand("mach create \"STM32F4_Flat\"", null);
             monitor.HandleCommand("machine LoadPlatformDescription @platforms/boards/stm32f4_flat.repl", null);
             monitor.HandleCommand("sysbus.cpu PerformanceInMips 125", null);
-            monitor.HandleCommand("emulation CreateServerSocketTerminal 3456 term", null);
+            monitor.HandleCommand("emulation CreateServerSocketTerminal 3456 \"term\"", null);
             monitor.HandleCommand("connector Connect sysbus.uart4 term", null);
             monitor.HandleCommand("sysbus LoadELF @https://dl.antmicro.com/projects/renode/stm32f4discovery.elf-s_445441-827a0dedd3790f4559d7518320006613768b5e72", null);
             monitor.HandleCommand("start", null);
 
-            Thread.Sleep(5000);
+            Thread.Sleep(4000);
         }
 
 
