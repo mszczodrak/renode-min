@@ -34,19 +34,19 @@ namespace Antmicro.Renode
             var dummyWriter = new Antmicro.Renode.UserInterface.DummyCommandInteraction(true);
             monitor.Interaction = dummyWriter;
 
-            // monitor.HandleCommand("mach create \"STM32F4_Flat\"", null);
-            var machine = new Core.Machine();
-            Core.EmulationManager.Instance.CurrentEmulation.AddMachine(machine, "ST");
+            //monitor.HandleCommand("mach create \"STM32F4_Flat\"", null);
+            //var machine = new Core.Machine();
+            //Core.EmulationManager.Instance.CurrentEmulation.AddMachine(machine, "ST");
 
-            // monitor.HandleCommand("machine LoadPlatformDescription @platforms/boards/stm32f4_flat.repl", null);
-            var driver = PlatformDescription.UserInterface.PlatformDescriptionMachineExtensions.PrepareDriver(machine);
-            driver.ProcessFile("/home/marcin/src/renode-min/platforms/boards/stm32f4_flat.repl");
-
-
-            // monitor.HandleCommand("sysbus.cpu PerformanceInMips 125", null);
+            //monitor.HandleCommand("machine LoadPlatformDescription @platforms/boards/stm32f4_flat.repl", null);
+            //var driver = PlatformDescription.UserInterface.PlatformDescriptionMachineExtensions.PrepareDriver(machine);
+            //driver.ProcessFile("/home/marcin/src/renode-min/platforms/boards/stm32f4_flat.repl");
 
 
-            /*
+            //monitor.HandleCommand("sysbus.cpu PerformanceInMips 125", null);
+
+
+            
             monitor.HandleCommand("mach create \"STM32F4_Flat\"", null);
             monitor.HandleCommand("machine LoadPlatformDescription @platforms/boards/stm32f4_flat.repl", null);
             monitor.HandleCommand("sysbus.cpu PerformanceInMips 125", null);
@@ -54,7 +54,7 @@ namespace Antmicro.Renode
             monitor.HandleCommand("connector Connect sysbus.uart4 term", null);
             monitor.HandleCommand("sysbus LoadELF @https://dl.antmicro.com/projects/renode/stm32f4discovery.elf-s_445441-827a0dedd3790f4559d7518320006613768b5e72", null);
             monitor.HandleCommand("start", null);
-            */
+            
 
             Thread.Sleep(4000);
         }

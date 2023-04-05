@@ -209,25 +209,9 @@ namespace Antmicro.Renode.UserInterface
             BindStatic("connector", () => emulationManager.CurrentEmulation.Connector);
             BindStatic("emulation", () => Emulation);
             BindStatic("plugins", () => TypeManager.Instance.PluginManager);
-            //BindStatic("EmulationManager", () => emulationManager);
 
-            Commands.Add(new HelpCommand(this, () =>
-            {
-                var gic = GetInternalCommands;
-                var result = Commands.Cast<ICommandDescription>();
-                if(gic != null)
-                {
-                    result = result.Concat(gic());
-                }
-                return result;
-            }));
             Commands.Add(new QuitCommand(this, x => currentMachine = x, () => Quitted));
-            //Commands.Add(new PeripheralsCommand(this, () => currentMachine));
-            Commands.Add(new UsingCommand(this, () => usings));
             Commands.Add(new StartCommand(this));
-            Commands.Add(new PythonExecuteCommand(this, x => ExpandVariable(x, variables), pythonRunner.ExecutePythonCommand));
-            Commands.Add(new ExecuteCommand(this, "execute", "VARIABLE", x => ExpandVariable(x, variables), () => variables.Keys));
-            Commands.Add(new ExecuteCommand(this, "runMacro", "MACRO", x => ExpandVariable(x, macros), () => macros.Keys));
             Commands.Add(new MachCommand(this, () => currentMachine, x => currentMachine = x));
 
         }
