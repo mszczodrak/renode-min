@@ -47,7 +47,7 @@ namespace Antmicro.Renode.PlatformDescription.UserInterface
             private readonly IEnumerable<string> pathPrefixes;
         }
 
-        private static CreationDriver PrepareDriver(Machine machine)
+        public static CreationDriver PrepareDriver(Machine machine)
         {
             var monitor = ObjectCreator.Instance.GetSurrogate<Monitor>();
             var usingResolver = new UsingResolver(monitor.CurrentPathPrefixes);

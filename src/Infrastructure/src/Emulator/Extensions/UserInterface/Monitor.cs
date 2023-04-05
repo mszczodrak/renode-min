@@ -225,12 +225,6 @@ namespace Antmicro.Renode.UserInterface
             //Commands.Add(new PeripheralsCommand(this, () => currentMachine));
             Commands.Add(new UsingCommand(this, () => usings));
             Commands.Add(new StartCommand(this));
-            Commands.Add(new SetCommand(this, "set", "VARIABLE", (x, y) => SetVariable(x, y, variables), (x, y) => EnableStringEater(x, y, VariableType.Variable),
-                DisableStringEater, () => stringEaterMode, GetVariableName));
-            Commands.Add(new SetCommand(this, "macro", "MACRO", (x, y) => SetVariable(x, y, macros), (x, y) => EnableStringEater(x, y, VariableType.Macro),
-                DisableStringEater, () => stringEaterMode, GetVariableName));
-            //Commands.Add(new SetCommand(this, "alias", "ALIAS", (x, y) => SetVariable(x, y, aliases), (x, y) => EnableStringEater(x, y, VariableType.Alias),
-	        //DisableStringEater, () => stringEaterMode, GetVariableName));
             Commands.Add(new PythonExecuteCommand(this, x => ExpandVariable(x, variables), pythonRunner.ExecutePythonCommand));
             Commands.Add(new ExecuteCommand(this, "execute", "VARIABLE", x => ExpandVariable(x, variables), () => variables.Keys));
             Commands.Add(new ExecuteCommand(this, "runMacro", "MACRO", x => ExpandVariable(x, macros), () => macros.Keys));
@@ -745,19 +739,6 @@ namespace Antmicro.Renode.UserInterface
                 return true;
             }
 
-            //variable definition
-            if(com.Length == 3 && com[0] is VariableToken && com[1] is EqualityToken)
-            {
-                Token dummy;
-                var variableToExpand = com[0] as VariableToken;
-                if(com[1] is ConditionalEqualityToken && TryExpandVariable(variableToExpand, variables, out dummy))
-                {
-                    //variable exists, so we ignore this command
-                    return true;
-                }
-                (Commands.OfType<SetCommand>().First()).Run(writer, variableToExpand, com[2]);
-                return true;
-            }
             var command = com[0] as LiteralToken;
 
             if(command == null)

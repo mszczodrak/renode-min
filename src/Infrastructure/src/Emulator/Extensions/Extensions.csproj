@@ -89,16 +89,13 @@
     <Compile Include="UserInterface\Commands\LoggerFileCommand.cs" />
     <Compile Include="UserInterface\Commands\PauseCommand.cs" />
     <Compile Include="UserInterface\Commands\StartCommand.cs" />
-    <Compile Include="UserInterface\Commands\SetCommand.cs" />
     <Compile Include="UserInterface\Commands\PythonExecuteCommand.cs" />
     <Compile Include="UserInterface\Tokenizer\LeftBraceToken.cs" />
     <Compile Include="UserInterface\Tokenizer\RightBraceToken.cs" />
     <Compile Include="TAPHelper\DynamicModuleSpawner.cs" />
     <Compile Include="TAPHelper\TAPTools.cs" />
     <Compile Include="UserInterface\Tokenizer\ExecutionToken.cs" />
-    <Compile Include="UserInterface\Commands\StringCommand.cs" />
     <Compile Include="UserInterface\Tokenizer\RangeToken.cs" />
-    <Compile Include="UserInterface\Commands\VersionCommand.cs" />
     <Compile Include="Backends\Display\xInput\IInputHandler.cs" />
     <Compile Include="Backends\Display\xInput\XLibHelper.cs" />
     <Compile Include="UserInterface\Commands\LogCommand.cs" />
@@ -106,7 +103,6 @@
     <Compile Include="UserInterface\Commands\PeripheralsCommand.cs" />
     <Compile Include="UserInterface\Tokenizer\MultilineStringToken.cs" />
     <Compile Include="UserInterface\Tokenizer\MultilineStringTerminatorToken.cs" />
-    <Compile Include="UserInterface\Commands\CreatePlatformCommand.cs" />
     <Compile Include="UserInterface\Commands\MachCommand.cs" />
     <Compile Include="UserInterface\MonitorPythonEngine.cs" />
     <Compile Include="Hooks\CpuHooksExtensions.cs" />
@@ -165,7 +161,6 @@
     <Compile Include="Utilities\USB\DeviceDescriptor.cs" />
     <Compile Include="Utilities\USB\InterfaceDescriptor.cs" />
     <Compile Include="Utilities\UartFileBackend.cs" />
-    <Compile Include="UserInterface\Commands\LastLogCommand.cs" />
     <Compile Include="Hooks\InterruptPythonEngine.cs" />
     <Compile Include="UserInterface\InlineImage.cs" />
   </ItemGroup>
