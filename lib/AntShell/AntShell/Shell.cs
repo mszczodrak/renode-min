@@ -154,7 +154,6 @@ namespace AntShell
 
         private void PrepareCommands()
         {
-            RegisterCommand(new CommandFromHistoryCommand(history));
             RegisterCommand(new HistoryCommand(history));
 
             if(settings.UseBuiltinSave)

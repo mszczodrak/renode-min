@@ -82,14 +82,11 @@
     <Compile Include="UserInterface\Commands\NumbersModeCommand.cs" />
     <Compile Include="UserInterface\Commands\Command.cs" />
     <Compile Include="UserInterface\Commands\CommandAttributes.cs" />
-    <Compile Include="UserInterface\Commands\AllowPrivatesCommand.cs" />
     <Compile Include="UserInterface\Commands\HelpCommand.cs" />
-    <Compile Include="UserInterface\Commands\WatchCommand.cs" />
     <Compile Include="UserInterface\Commands\TimeCommand.cs" />
     <Compile Include="UserInterface\Commands\IncludeFileCommand.cs" />
     <Compile Include="UserInterface\Commands\UsingCommand.cs" />
     <Compile Include="UserInterface\Commands\QuitCommand.cs" />
-    <Compile Include="UserInterface\Commands\MonitorPathCommand.cs" />
     <Compile Include="UserInterface\Commands\LogLevelCommand.cs" />
     <Compile Include="UserInterface\Commands\LoggerFileCommand.cs" />
     <Compile Include="UserInterface\Commands\PauseCommand.cs" />
@@ -107,7 +104,6 @@
     <Compile Include="Backends\Display\xInput\IInputHandler.cs" />
     <Compile Include="Backends\Display\xInput\XLibHelper.cs" />
     <Compile Include="UserInterface\Commands\LogCommand.cs" />
-    <Compile Include="UserInterface\Commands\RequireVariableCommand.cs" />
     <Compile Include="UserInterface\CommandInteractionEater.cs" />
     <Compile Include="UserInterface\Commands\PeripheralsCommand.cs" />
     <Compile Include="UserInterface\Tokenizer\MultilineStringToken.cs" />
@@ -115,7 +111,6 @@
     <Compile Include="UserInterface\Commands\CreatePlatformCommand.cs" />
     <Compile Include="UserInterface\Commands\MachCommand.cs" />
     <Compile Include="UserInterface\MonitorPythonEngine.cs" />
-    <Compile Include="UserInterface\Commands\VerboseCommand.cs" />
     <Compile Include="Hooks\CpuHooksExtensions.cs" />
     <Compile Include="Hooks\BlockPythonEngine.cs" />
     <Compile Include="UserInterface\Exceptions\ParametersMismatchException.cs" />

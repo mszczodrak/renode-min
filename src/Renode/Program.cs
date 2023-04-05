@@ -19,8 +19,8 @@ namespace Antmicro.Renode
                 Emulator.DisposeAll();
             };
             
-            // RunShell();
-            RunDirect();
+            RunShell();
+            //RunDirect();
         }
 
 

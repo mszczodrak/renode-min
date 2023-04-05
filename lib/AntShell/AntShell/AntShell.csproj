@@ -54,7 +54,6 @@
     <Compile Include="Commands\BuiltIn\QuitCommand.cs" />
     <Compile Include="Commands\BuiltIn\HelpCommand.cs" />
     <Compile Include="Commands\BuiltIn\ColorsCommand.cs" />
-    <Compile Include="Commands\BuiltIn\CommandFromHistoryCommand.cs" />
     <Compile Include="Commands\IOperator.cs" />
     <Compile Include="Encoding\CustomDecoderFallback.cs" />
     <Compile Include="Encoding\CustomDecoderFallbackBuffer.cs" />
