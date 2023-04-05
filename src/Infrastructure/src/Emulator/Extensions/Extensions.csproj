@@ -79,12 +79,10 @@
     <Compile Include="UserInterface\Tokenizer\BooleanToken.cs" />
     <Compile Include="UserInterface\Tokenizer\NullToken.cs" />
     <Compile Include="UserInterface\Commands\ExecuteCommand.cs" />
-    <Compile Include="UserInterface\Commands\NumbersModeCommand.cs" />
     <Compile Include="UserInterface\Commands\Command.cs" />
     <Compile Include="UserInterface\Commands\CommandAttributes.cs" />
     <Compile Include="UserInterface\Commands\HelpCommand.cs" />
     <Compile Include="UserInterface\Commands\TimeCommand.cs" />
-    <Compile Include="UserInterface\Commands\IncludeFileCommand.cs" />
     <Compile Include="UserInterface\Commands\UsingCommand.cs" />
     <Compile Include="UserInterface\Commands\QuitCommand.cs" />
     <Compile Include="UserInterface\Commands\LogLevelCommand.cs" />

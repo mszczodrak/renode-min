@@ -211,7 +211,6 @@ namespace Antmicro.Renode.UserInterface
             BindStatic("plugins", () => TypeManager.Instance.PluginManager);
             //BindStatic("EmulationManager", () => emulationManager);
 
-            var includeCommand = new IncludeFileCommand(this, (x, y) => pythonRunner.TryExecutePythonScript(x, y), x => TryExecuteScript(x), (x, y) => TryCompilePlugin(x, y));
             Commands.Add(new HelpCommand(this, () =>
             {
                 var gic = GetInternalCommands;
@@ -222,11 +221,10 @@ namespace Antmicro.Renode.UserInterface
                 }
                 return result;
             }));
-            Commands.Add(includeCommand);
             Commands.Add(new QuitCommand(this, x => currentMachine = x, () => Quitted));
             //Commands.Add(new PeripheralsCommand(this, () => currentMachine));
             Commands.Add(new UsingCommand(this, () => usings));
-            Commands.Add(new StartCommand(this, includeCommand));
+            Commands.Add(new StartCommand(this));
             Commands.Add(new SetCommand(this, "set", "VARIABLE", (x, y) => SetVariable(x, y, variables), (x, y) => EnableStringEater(x, y, VariableType.Variable),
                 DisableStringEater, () => stringEaterMode, GetVariableName));
             Commands.Add(new SetCommand(this, "macro", "MACRO", (x, y) => SetVariable(x, y, macros), (x, y) => EnableStringEater(x, y, VariableType.Macro),

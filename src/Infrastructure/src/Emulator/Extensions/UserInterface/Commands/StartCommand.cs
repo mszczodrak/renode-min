@@ -31,24 +31,9 @@ namespace Antmicro.Renode.UserInterface.Commands
             EmulationManager.Instance.CurrentEmulation.StartAll();
         }
 
-        [Runnable]
-        public void Run(ICommandInteraction writer, PathToken path)
+        public StartCommand(Monitor monitor) :  base(monitor, "start", "starts the emulation.", "s")
         {
-            if(IncludeCommand.Run(writer, path))
-            {
-                EmulationManager.Instance.CurrentEmulation.StartAll();
-            }
-        }
 
-        private readonly IncludeFileCommand IncludeCommand;
-
-        public StartCommand(Monitor monitor, IncludeFileCommand includeCommand) :  base(monitor, "start", "starts the emulation.", "s")
-        {
-            if(includeCommand == null)
-            {
-                throw new ArgumentException("includeCommand cannot be null.", "includeCommand");
-            }
-            IncludeCommand = includeCommand;
         }
     }
 }
